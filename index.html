@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Pembelajaran Bahasa C</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 30px 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-item {
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,1);
+        }
+
+        .nav-item h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .nav-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .subsection {
+            margin-bottom: 25px;
+        }
+
+        .subsection h3 {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: "C Code";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #6c757d;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .warning {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .example-box {
+            background: #f1f3f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .example-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media print {
+            .back-btn, .navigation { display: none !important; }
+            .content-section { display: block !important; }
+            body { background: white !important; }
+            .container { max-width: none !important; margin: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Modul Pembelajaran Bahasa C</h1>
+            <p>Panduan lengkap untuk mempelajari pemrograman C dari dasar hingga lanjutan</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation" id="navigation">
+            <div class="nav-grid">
+                <div class="nav-item" onclick="showSection('intro')">
+                    <h3>🚀 Pengenalan Algoritma & C</h3>
+                    <p>Dasar-dasar pemrograman dan pengenalan bahasa C</p>
+                </div>
+                <div class="nav-item" onclick="showSection('basics')">
+                    <h3>📝 Input/Output & Format</h3>
+                    <p>Cara menggunakan printf, scanf, dan formatting</p>
+                </div>
+                <div class="nav-item" onclick="showSection('operators')">
+                    <h3>⚡ Operator & Aritmatika</h3>
+                    <p>Operator aritmatika, logika, dan perbandingan</p>
+                </div>
+                <div class="nav-item" onclick="showSection('control')">
+                    <h3>🔄 Struktur Kontrol</h3>
+                    <p>If-else, switch, dan struktur pemilihan</p>
+                </div>
+                <div class="nav-item" onclick="showSection('loops')">
+                    <h3>🔁 Perulangan</h3>
+                    <p>For, while, do-while, dan nested loops</p>
+                </div>
+                <div class="nav-item" onclick="showSection('arrays')">
+                    <h3>📊 Array & Pointer</h3>
+                    <p>Array satu dimensi, dua dimensi, dan pointer</p>
+                </div>
+                <div class="nav-item" onclick="showSection('functions')">
+                    <h3>🔧 Function & Recursion</h3>
+                    <p>Pembuatan fungsi dan rekursi</p>
+                </div>
+                <div class="nav-item" onclick="showSection('structures')">
+                    <h3>🏗️ Structure & Union</h3>
+                    <p>Struktur data kompleks dan union</p>
+                </div>
+                <div class="nav-item" onclick="showSection('memory')">
+                    <h3>💾 Memory Allocation</h3>
+                    <p>Dynamic memory allocation dengan malloc</p>
+                </div>
+                <div class="nav-item" onclick="showSection('files')">
+                    <h3>📁 File Processing</h3>
+                    <p>Operasi file dan pencarian data</p>
+                </div>
+                <div class="nav-item" onclick="showSection('sorting')">
+                    <h3>🔢 Algoritma Sorting</h3>
+                    <p>Bubble sort, selection sort, insertion sort</p>
+                </div>
+                <div class="nav-item" onclick="showSection('advanced')">
+                    <h3>🎓 Advanced Learning</h3>
+                    <p>Topik lanjutan dan best practices</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+
+        <!-- Introduction Section -->
+        <div class="content-section" id="intro">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🚀 Pengenalan Algoritma & Bahasa C</h2>
+            
+            <div class="subsection">
+                <h3>Apa itu Algoritma?</h3>
+                <p>Algoritma adalah serangkaian langkah-langkah logis yang disusun secara sistematis untuk memecahkan suatu masalah atau mencapai tujuan tertentu.</p>
+                
+                <div class="highlight">
+                    <strong>Karakteristik Algoritma:</strong>
+                    <ul>
+                        <li>Input: Memiliki nol atau lebih masukan</li>
+                        <li>Output: Memiliki satu atau lebih keluaran</li>
+                        <li>Definiteness: Setiap langkah harus jelas dan tidak ambigu</li>
+                        <li>Finiteness: Harus berakhir dalam jumlah langkah terbatas</li>
+                        <li>Effectiveness: Setiap langkah harus dapat dikerjakan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Pengenalan Bahasa C</h3>
+                <p>Bahasa C adalah bahasa pemrograman tingkat menengah yang dikembangkan oleh Dennis Ritchie pada tahun 1972. C menjadi dasar bagi banyak bahasa pemrograman modern.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Program C Pertama:</div>
+                    <div class="code-block">
+                    <pre><code>
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+</code></pre>
+}
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <strong>Penjelasan Kode:</strong><br>
+                    • <code>#include &lt;stdio.h&gt;</code> - Menyertakan header file untuk input/output<br>
+                    • <code>int main()</code> - Fungsi utama program<br>
+                    • <code>printf()</code> - Fungsi untuk mencetak ke layar<br>
+                    • <code>return 0;</code> - Mengakhiri program dengan status sukses
+                </div>
+            </div>
+        </div>
+
+        <!-- Functions Section (Continued) -->
+        <div class="content-section" id="functions">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🔧 Function & Recursion</h2>
+            
+            <div class="subsection">
+                <h3>Melanjutkan Pass by Reference</h3>
+                <div class="example-box">
+                    <div class="example-title">Contoh Lengkap Pass by Value vs Reference:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <string.h>
+
+// Pass by value - nilai asli tidak berubah
+void ubahNilai(int x) {
+    x = 100;
+    printf("Dalam function ubahNilai: x = %d\n", x);
+}
+
+// Pass by reference - menggunakan pointer
+void ubahNilaiReference(int *x) {
+    *x = 100;
+    printf("Dalam function ubahNilaiReference: *x = %d\n", *x);
+}
+
+// Function untuk swap dua variabel
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Function untuk mengisi array
+void isiArray(int arr[], int ukuran) {
+    for (int i = 0; i < ukuran; i++) {
+        arr[i] = i * 10;
+    }
+}
+
+int main() {
+    int angka = 50;
+    
+    printf("Sebelum ubahNilai: angka = %d\n", angka);
+    ubahNilai(angka);
+    printf("Setelah ubahNilai: angka = %d\n\n", angka);
+    
+    printf("Sebelum ubahNilaiReference: angka = %d\n", angka);
+    ubahNilaiReference(&angka);
+    printf("Setelah ubahNilaiReference: angka = %d\n\n", angka);
+    
+    // Contoh swap
+    int x = 10, y = 20;
+    printf("Sebelum swap: x = %d, y = %d\n", x, y);
+    swap(&x, &y);
+    printf("Setelah swap: x = %d, y = %d\n\n", x, y);
+    
+    // Contoh dengan array
+    int data[5];
+    isiArray(data, 5);
+    
+    printf("Array setelah diisi:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("data[%d] = %d\n", i, data[i]);
+    }
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Recursion (Rekursi)</h3>
+                <p>Rekursi adalah teknik di mana function memanggil dirinya sendiri untuk menyelesaikan masalah yang lebih kecil.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh Rekursi - Faktorial:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+// Rekursi untuk faktorial
+int faktorial(int n) {
+    // Base case
+    if (n <= 1) {
+        return 1;
+    }
+    // Recursive case
+    return n * faktorial(n - 1);
+}
+
+// Rekursi untuk Fibonacci
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Rekursi untuk menghitung pangkat
+int pangkat(int base, int exp) {
+    if (exp == 0) {
+        return 1;
+    }
+    return base * pangkat(base, exp - 1);
+}
+
+int main() {
+    int n = 5;
+    
+    printf("Faktorial %d = %d\n", n, faktorial(n));
+    
+    printf("Deret Fibonacci:\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", fibonacci(i));
+    }
+    printf("\n\n");
+    
+    printf("2^5 = %d\n", pangkat(2, 5));
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Structures Section -->
+        <div class="content-section" id="structures">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🏗️ Structure & Union</h2>
+            
+            <div class="subsection">
+                <h3>Struktur (struct)</h3>
+                <p>Struktur memungkinkan kita mengelompokkan berbagai tipe data menjadi satu unit.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh Struktur Mahasiswa:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <string.h>
+
+// Definisi struktur
+struct Mahasiswa {
+    int nim;
+    char nama[50];
+    float ipk;
+    char jurusan[30];
+};
+
+// Typedef untuk mempermudah penggunaan
+typedef struct {
+    int hari;
+    int bulan;
+    int tahun;
+} Tanggal;
+
+typedef struct {
+    int nim;
+    char nama[50];
+    Tanggal tanggalLahir;
+    float ipk;
+} DataMahasiswa;
+
+int main() {
+    // Deklarasi dan inisialisasi struktur
+    struct Mahasiswa mhs1;
+    mhs1.nim = 12345;
+    strcpy(mhs1.nama, "Budi Santoso");
+    mhs1.ipk = 3.75;
+    strcpy(mhs1.jurusan, "Informatika");
+    
+    // Inisialisasi langsung
+    struct Mahasiswa mhs2 = {54321, "Sari Dewi", 3.85, "Sistem Informasi"};
+    
+    // Menggunakan typedef
+    DataMahasiswa mhs3;
+    mhs3.nim = 67890;
+    strcpy(mhs3.nama, "Andi Wijaya");
+    mhs3.tanggalLahir.hari = 15;
+    mhs3.tanggalLahir.bulan = 8;
+    mhs3.tanggalLahir.tahun = 2000;
+    mhs3.ipk = 3.92;
+    
+    // Menampilkan data
+    printf("Data Mahasiswa 1:\n");
+    printf("NIM: %d\n", mhs1.nim);
+    printf("Nama: %s\n", mhs1.nama);
+    printf("IPK: %.2f\n", mhs1.ipk);
+    printf("Jurusan: %s\n\n", mhs1.jurusan);
+    
+    printf("Data Mahasiswa 3:\n");
+    printf("NIM: %d\n", mhs3.nim);
+    printf("Nama: %s\n", mhs3.nama);
+    printf("Tanggal Lahir: %d/%d/%d\n", 
+           mhs3.tanggalLahir.hari, 
+           mhs3.tanggalLahir.bulan, 
+           mhs3.tanggalLahir.tahun);
+    printf("IPK: %.2f\n", mhs3.ipk);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Union</h3>
+                <p>Union mirip dengan struct, tetapi semua anggotanya berbagi lokasi memori yang sama.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh Union:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+// Union untuk menyimpan berbagai tipe data
+union Data {
+    int i;
+    float f;
+    char c;
+};
+
+typedef union {
+    struct {
+        unsigned char byte1;
+        unsigned char byte2;
+        unsigned char byte3;
+        unsigned char byte4;
+    } bytes;
+    unsigned int value;
+} IntBytes;
+
+int main() {
+    union Data data;
+    
+    printf("Ukuran union Data: %lu bytes\n", sizeof(data));
+    
+    // Menggunakan union
+    data.i = 42;
+    printf("data.i = %d\n", data.i);
+    
+    data.f = 3.14;
+    printf("data.f = %.2f\n", data.f);
+    printf("data.i sekarang = %d (corrupt)\n", data.i);
+    
+    data.c = 'A';
+    printf("data.c = %c\n", data.c);
+    printf("data.f sekarang = %.2f (corrupt)\n", data.f);
+    
+    // Contoh praktis - memecah integer menjadi bytes
+    printf("\nMemecah integer menjadi bytes:\n");
+    IntBytes intData;
+    intData.value = 0x12345678;
+    
+    printf("Nilai: 0x%08X\n", intData.value);
+    printf("Byte 1: 0x%02X\n", intData.bytes.byte1);
+    printf("Byte 2: 0x%02X\n", intData.bytes.byte2);
+    printf("Byte 3: 0x%02X\n", intData.bytes.byte3);
+    printf("Byte 4: 0x%02X\n", intData.bytes.byte4);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Allocation Section -->
+        <div class="content-section" id="memory">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">💾 Memory Allocation</h2>
+            
+            <div class="subsection">
+                <h3>Dynamic Memory Allocation</h3>
+                <p>Dynamic memory allocation memungkinkan program mengalokasikan memori saat runtime.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">malloc, calloc, realloc, dan free:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int n;
+    
+    printf("Masukkan jumlah elemen: ");
+    scanf("%d", &n);
+    
+    // malloc - mengalokasikan memori tanpa inisialisasi
+    int *arr1 = (int*)malloc(n * sizeof(int));
+    if (arr1 == NULL) {
+        printf("Alokasi memori gagal!\n");
+        return 1;
+    }
+    
+    // calloc - mengalokasikan memori dengan inisialisasi 0
+    int *arr2 = (int*)calloc(n, sizeof(int));
+    if (arr2 == NULL) {
+        printf("Alokasi memori gagal!\n");
+        free(arr1);
+        return 1;
+    }
+    
+    // Mengisi array
+    printf("Masukkan %d angka:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
+    
+    // Menampilkan array
+    printf("Array 1 (malloc): ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
+    
+    printf("Array 2 (calloc): ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr2[i]);
+    }
+    printf("\n");
+    
+    // realloc - mengubah ukuran memori
+    printf("Mengubah ukuran array menjadi %d elemen\n", n * 2);
+    arr1 = (int*)realloc(arr1, n * 2 * sizeof(int));
+    if (arr1 == NULL) {
+        printf("Realloc gagal!\n");
+        free(arr2);
+        return 1;
+    }
+    
+    // Inisialisasi elemen baru
+    for (int i = n; i < n * 2; i++) {
+        arr1[i] = i * 10;
+    }
+    
+    printf("Array setelah realloc: ");
+    for (int i = 0; i < n * 2; i++) {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
+    
+    // Jangan lupa free memory
+    free(arr1);
+    free(arr2);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Memory Management untuk Struktur</h3>
+                <div class="example-box">
+                    <div class="example-title">Dynamic Array of Structures:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    int id;
+    char nama[50];
+    float nilai;
+} Siswa;
+
+Siswa* buatArraySiswa(int jumlah) {
+    Siswa *siswa = (Siswa*)malloc(jumlah * sizeof(Siswa));
+    if (siswa == NULL) {
+        printf("Alokasi memori gagal!\n");
+        return NULL;
+    }
+    return siswa;
+}
+
+void inputSiswa(Siswa *siswa, int index) {
+    printf("Masukkan data siswa ke-%d:\n", index + 1);
+    printf("ID: ");
+    scanf("%d", &siswa[index].id);
+    printf("Nama: ");
+    scanf("%s", siswa[index].nama);
+    printf("Nilai: ");
+    scanf("%f", &siswa[index].nilai);
+}
+
+void tampilkanSiswa(Siswa *siswa, int jumlah) {
+    printf("\nData Siswa:\n");
+    printf("%-5s %-20s %-10s\n", "ID", "Nama", "Nilai");
+    printf("------------------------------------\n");
+    for (int i = 0; i < jumlah; i++) {
+        printf("%-5d %-20s %-10.2f\n", 
+               siswa[i].id, siswa[i].nama, siswa[i].nilai);
+    }
+}
+
+int main() {
+    int jumlah;
+    
+    printf("Masukkan jumlah siswa: ");
+    scanf("%d", &jumlah);
+    
+    Siswa *siswa = buatArraySiswa(jumlah);
+    if (siswa == NULL) {
+        return 1;
+    }
+    
+    for (int i = 0; i < jumlah; i++) {
+        inputSiswa(siswa, i);
+    }
+    
+    tampilkanSiswa(siswa, jumlah);
+    
+    free(siswa);
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Processing Section -->
+        <div class="content-section" id="files">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">📁 File Processing</h2>
+            
+            <div class="subsection">
+                <h3>Operasi File Dasar</h3>
+                <div class="example-box">
+                    <div class="example-title">Membaca dan Menulis File:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    FILE *file;
+    char nama[50], line[100];
+    int umur;
+    
+    // Menulis ke file
+    file = fopen("data.txt", "w");
+    if (file == NULL) {
+        printf("Tidak dapat membuat file!\n");
+        return 1;
+    }
+    
+    printf("Masukkan nama: ");
+    scanf("%s", nama);
+    printf("Masukkan umur: ");
+    scanf("%d", &umur);
+    
+    fprintf(file, "Nama: %s\n", nama);
+    fprintf(file, "Umur: %d\n", umur);
+    fprintf(file, "Status: Aktif\n");
+    
+    fclose(file);
+    printf("Data berhasil disimpan ke data.txt\n");
+    
+    // Membaca dari file
+    file = fopen("data.txt", "r");
+    if (file == NULL) {
+        printf("Tidak dapat membaca file!\n");
+        return 1;
+    }
+    
+    printf("\nIsi file data.txt:\n");
+    while (fgets(line, sizeof(line), file) != NULL) {
+        printf("%s", line);
+    }
+    
+    fclose(file);
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>File Processing dengan Struktur</h3>
+                <div class="example-box">
+                    <div class="example-title">Menyimpan Data Mahasiswa ke File:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    int nim;
+    char nama[50];
+    float ipk;
+    char jurusan[30];
+} Mahasiswa;
+
+void simpanMahasiswa(Mahasiswa mhs[], int jumlah, const char *filename) {
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL) {
+        printf("Tidak dapat membuat file %s!\n", filename);
+        return;
+    }
+    
+    fwrite(mhs, sizeof(Mahasiswa), jumlah, file);
+    fclose(file);
+    printf("Data berhasil disimpan ke %s\n", filename);
+}
+
+int bacaMahasiswa(Mahasiswa mhs[], int maxJumlah, const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL) {
+        printf("File %s tidak ditemukan!\n", filename);
+        return 0;
+    }
+    
+    int jumlah = fread(mhs, sizeof(Mahasiswa), maxJumlah, file);
+    fclose(file);
+    return jumlah;
+}
+
+void tampilkanMahasiswa(Mahasiswa mhs[], int jumlah) {
+    printf("\nData Mahasiswa:\n");
+    printf("%-10s %-20s %-8s %-15s\n", "NIM", "Nama", "IPK", "Jurusan");
+    printf("--------------------------------------------------------\n");
+    for (int i = 0; i < jumlah; i++) {
+        printf("%-10d %-20s %-8.2f %-15s\n", 
+               mhs[i].nim, mhs[i].nama, mhs[i].ipk, mhs[i].jurusan);
+    }
+}
+
+int main() {
+    Mahasiswa mahasiswa[100];
+    int jumlah = 0;
+    int pilihan;
+    
+    do {
+        printf("\n=== SISTEM DATA MAHASISWA ===\n");
+        printf("1. Input data mahasiswa\n");
+        printf("2. Tampilkan data\n");
+        printf("3. Simpan ke file\n");
+        printf("4. Baca dari file\n");
+        printf("5. Keluar\n");
+        printf("Pilihan: ");
+        scanf("%d", &pilihan);
+        
+        switch(pilihan) {
+            case 1:
+                if (jumlah < 100) {
+                    printf("Masukkan data mahasiswa ke-%d:\n", jumlah + 1);
+                    printf("NIM: ");
+                    scanf("%d", &mahasiswa[jumlah].nim);
+                    printf("Nama: ");
+                    scanf("%s", mahasiswa[jumlah].nama);
+                    printf("IPK: ");
+                    scanf("%f", &mahasiswa[jumlah].ipk);
+                    printf("Jurusan: ");
+                    scanf("%s", mahasiswa[jumlah].jurusan);
+                    jumlah++;
+                } else {
+                    printf("Data sudah penuh!\n");
+                }
+                break;
+                
+            case 2:
+                if (jumlah > 0) {
+                    tampilkanMahasiswa(mahasiswa, jumlah);
+                } else {
+                    printf("Belum ada data!\n");
+                }
+                break;
+                
+            case 3:
+                if (jumlah > 0) {
+                    simpanMahasiswa(mahasiswa, jumlah, "mahasiswa.dat");
+                } else {
+                    printf("Belum ada data untuk disimpan!\n");
+                }
+                break;
+                
+            case 4:
+                jumlah = bacaMahasiswa(mahasiswa, 100, "mahasiswa.dat");
+                if (jumlah > 0) {
+                    printf("Berhasil membaca %d data mahasiswa\n", jumlah);
+                }
+                break;
+        }
+    } while (pilihan != 5);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sorting Section -->
+        <div class="content-section" id="sorting">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🔢 Algoritma Sorting</h2>
+            
+            <div class="subsection">
+                <h3>Bubble Sort</h3>
+                <p>Bubble sort adalah algoritma sorting sederhana yang membandingkan elemen bersebelahan dan menukarnya jika tidak berurutan.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Implementasi Bubble Sort:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n) {
+    int temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap elements
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    printArray(arr, n);
+    
+    bubbleSort(arr, n);
+    
+    printf("Array setelah bubble sort: ");
+    printArray(arr, n);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Selection Sort</h3>
+                <div class="example-box">
+                    <div class="example-title">Implementasi Selection Sort:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+void selectionSort(int arr[], int n) {
+    int minIndex, temp;
+    
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+        
+        // Cari elemen terkecil di sisa array
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        
+        // Tukar elemen
+        if (minIndex != i) {
+            temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+int main() {
+    int arr[] = {29, 10, 14, 37, 13, 25, 6};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    selectionSort(arr, n);
+    
+    printf("Array setelah selection sort: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Insertion Sort</h3>
+                <div class="example-box">
+                    <div class="example-title">Implementasi Insertion Sort:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+void insertionSort(int arr[], int n) {
+    int key, j;
+    
+    for (int i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+        
+        // Pindahkan elemen yang lebih besar dari key
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    int arr[] = {5, 2, 4, 6, 1, 3};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    insertionSort(arr, n);
+    
+    printf("Array setelah insertion sort: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Perbandingan Algoritma Sorting</h3>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Algoritma</th>
+                            <th>Time Complexity (Best)</th>
+                            <th>Time Complexity (Average)</th>
+                            <th>Time Complexity (Worst)</th>
+                            <th>Space Complexity</th>
+                        </tr>
+                        <tr>
+                            <td>Bubble Sort</td>
+                            <td>O(n)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Selection Sort</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Insertion Sort</td>
+                            <td>O(n)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Learning Section -->
+        <div class="content-section" id="advanced">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🎓 Advanced Learning</h2>
+            
+            <div class="subsection">
+                <h3>Preprocessor Directives</h3>
+                <div class="example-box">
+                    <div class="example-title">Contoh Preprocessor:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <math.h>
+
+// Define constants
+#define PI 3.14159
+#define MAX_SIZE 100
+#define SQUARE(x) ((x) * (x))
+
+// Conditional compilation
+#define DEBUG 1
+
+#if DEBUG
+    #define PRINT_DEBUG(x) printf("Debug: %s\n", x)
+#else
+    #define PRINT_DEBUG(x)
+#endif
+
+// Macro with multiple statements
+#define SWAP(a, b) do { \
+    int temp = a; \
+    a = b; \
+    b = temp; \
+} while(0)
+
+int main() {
+    printf("Nilai PI: %.5f\n", PI);
+    printf("MAX_SIZE: %d\n", MAX_SIZE);
+    
+    int x = 5;
+    printf("Square of %d = %d\n", x, SQUARE(x));
+    
+    PRINT_DEBUG("Program berjalan");
+    
+    int a = 10, b = 20;
+    printf("Sebelum swap: a=%d, b=%d\n", a, b);
+    SWAP(a, b);
+    printf("Setelah swap: a=%d, b=%d\n", a, b);
+    
+    // Predefined macros
+    printf("File: %s\n", __FILE__);
+    printf("Line: %d\n", __LINE__);
+    printf("Date: %s\n", __DATE__);
+    printf("Time: %s\n", __TIME__);
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Error Handling</h3>
+                <div class="example-box">
+                    <div class="example-title">Error Handling yang Baik:</div>
+                    <div class="code-block">
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+
+// Function untuk safe division
+int safeDivide(int dividend, int divisor, float *result) {
+    if (result == NULL) {
+        fprintf(stderr, "Error: NULL pointer untuk result\n");
+        return -1;
+    }
+    
+    if (divisor == 0) {
+        fprintf(stderr, "Error: Division by zero\n");
+        return -1;
+    }
+    
+    *result = (float)dividend / divisor;
+    return 0;
+}
+
+// Function untuk safe file operation
+FILE* safeFileOpen(const char *filename, const char *mode) {
+    FILE *file = fopen(filename, mode);
+    if (file == NULL) {
+        fprintf(stderr, "Error: Tidak dapat membuka file '%s' dengan mode '%s'\n", 
+                filename, mode);
+        fprintf(stderr, "System error: %s\n", strerror(errno));
+    }
+    return file;
+}
+
+int main() {
+    float result;
+    
+    // Test safe division
+    if (safeDivide(10, 2, &result) == 0) {
+        printf("10 / 2 = %.2f\n", result);
+    }
+    
+    if (safeDivide(10, 0, &result) != 0) {
+        printf("Division by zero handled gracefully\n");
+    }
+    
+    // Test safe file operation
+    FILE *file = safeFileOpen("test.txt", "w");
+    if (file != NULL) {
+        fprintf(file, "Hello, World!\n");
+        fclose(file);
+        printf("File berhasil ditulis\n");
+    }
+    
+    // Test reading non-existent file
+    file = safeFileOpen("nonexistent.txt", "r");
+    if (file == NULL) {
+        printf("File tidak ditemukan - error handled\n");
+    }
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Best Practices</h3>
+                <div class="highlight">
+                    <strong>Tips Pemrograman C yang Baik:</strong><br>
+                    • Selalu inisialisasi variabel sebelum digunakan<br>
+                    • Gunakan const untuk nilai yang tidak berubah<br>
+                    • Periksa return value dari function<br>
+                    • Selalu free() memory yang di-malloc()<br>
+                    • Gunakan meaningful variable names<br>
+                    • Tambahkan komentar untuk kode yang kompleks<br>
+                    • Hindari global variables jika memungkinkan<br>
+                    • Gunakan static untuk function yang hanya dipakai dalam file yang sama
+                </div>
+
+                <div class="warning">
+                    <strong>Common Mistakes yang Harus Dihindari:</strong><br>
+                    • Buffer overflow - selalu cek batas array<br>
+                    • Memory leaks - jangan lupa free()<br>
+                    • Uninitialized variables<br>
+                    • Infinite loops<br>
+                    • Integer overflow<br>
+                    • Null pointer dereference
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Project Ideas untuk Latihan</h3>
+                <div class="example-box">
+                    <div class="example-title">Project yang Bisa Dikerjakan:</div>
+                    <ol>
+                        <li><strong>Kalkulator Lanjutan:</strong> Dengan history, memory functions</li>
+                        <li><strong>Sistem Manajemen Kontak:</strong> CRUD operations dengan file</li>
+                        <li><strong>Game Tic-Tac-Toe:</strong> Dengan AI sederhana</li>
+                        <li><strong>Text Editor Sederhana:</strong> Baca, edit, simpan file text</li>
+                        <li><strong>Inventory Management:</strong> Untuk toko atau gudang</li>
+                        <li><strong>Student Grading System:</strong> Dengan statistik</li>
+                        <li><strong>Simple Banking System:</strong> Dengan file untuk menyimpan data</li>
+                        <li><strong>Password Generator:</strong> Dengan berbagai kriteria</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- All other missing sections would continue here with similar structure -->
+        <!-- Basics Section -->
+        <div class="content-section" id="basics">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">📝 Input/Output & Format</h2>
+            
+            <div class="subsection">
+                <h3>Fungsi printf() - Output</h3>
+                <p>Fungsi printf() digunakan untuk menampilkan output ke layar dengan berbagai format.</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Format Specifier</th>
+                            <th>Tipe Data</th>
+                            <th>Contoh</th>
+                        </tr>
+                        <tr>
+                            <td>%d atau %i</td>
+                            <td>Integer</td>
+                            <td>printf("%d", 42);</td>
+                        </tr>
+                        <tr>
+                            <td>%f</td>
+                            <td>Float</td>
+                            <td>printf("%.2f", 3.14);</td>
+                        </tr>
+                        <tr>
+                            <td>%c</td>
+                            <td>Character</td>
+                            <td>printf("%c", 'A');</td>
+                        </tr>
+                        <tr>
+                            <td>%s</td>
+                            <td>String</td>
+                            <td>printf("%s", "Hello");</td>
+                        </tr>
+                        <tr>
+                            <td>%x</td>
+                            <td>Hexadecimal</td>
+                            <td>printf("%x", 255);</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">Contoh Penggunaan printf():</div>
+                    <div class="code-block">
+                        <pre><code>
+#include <stdio.h>
+
+int main() {
+    int umur = 20;
+    float tinggi = 175.5;
+    char grade = 'A';
+    char nama[] = "Budi";
+    
+    printf("Nama: %s\n", nama);
+    printf("Umur: %d tahun\n", umur);
+    printf("Tinggi: %.1f cm\n", tinggi);
+    printf("Grade: %c\n", grade);
+    printf("Nilai dalam hex: %x\n", umur);
+    
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Operators Section -->
+<div class="content-section" id="operators">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">⚡ Operator & Aritmatika</h2>
+    
+    <div class="subsection">
+        <h3>Operator Aritmatika</h3>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Operasi</th>
+                    <th>Contoh</th>
+                    <th>Hasil</th>
+                </tr>
+                <tr><td>+</td><td>Penjumlahan</td><td>5 + 3</td><td>8</td></tr>
+                <tr><td>-</td><td>Pengurangan</td><td>5 - 3</td><td>2</td></tr>
+                <tr><td>*</td><td>Perkalian</td><td>5 * 3</td><td>15</td></tr>
+                <tr><td>/</td><td>Pembagian</td><td>10 / 3</td><td>3 (integer)</td></tr>
+                <tr><td>%</td><td>Modulus (sisa bagi)</td><td>10 % 3</td><td>1</td></tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Program Kalkulator Sederhana:</div>
+            <div class="code-block">
+<pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 15, b = 4;
+    
+    printf("a = %d, b = %d\n", a, b);
+    printf("a + b = %d\n", a + b);
+    printf("a - b = %d\n", a - b);
+    printf("a * b = %d\n", a * b);
+    printf("a / b = %d\n", a / b);        // Pembagian integer
+    printf("a / b = %.2f\n", (float)a / b); // Pembagian float
+    printf("a %% b = %d\n", a % b);       // Modulus
+    
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Operator Perbandingan -->
+    <div class="subsection">
+        <h3>Operator Perbandingan</h3>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Operasi</th>
+                    <th>Contoh</th>
+                    <th>Hasil</th>
+                </tr>
+                <tr><td>==</td><td>Sama dengan</td><td>5 == 5</td><td>True (1)</td></tr>
+                <tr><td>!=</td><td>Tidak sama dengan</td><td>5 != 3</td><td>True (1)</td></tr>
+                <tr><td>&gt;</td><td>Lebih besar</td><td>5 &gt; 3</td><td>True (1)</td></tr>
+                <tr><td>&lt;</td><td>Lebih kecil</td><td>3 &lt; 5</td><td>True (1)</td></tr>
+                <tr><td>&gt;=</td><td>Lebih besar atau sama dengan</td><td>5 &gt;= 5</td><td>True (1)</td></tr>
+                <tr><td>&lt;=</td><td>Lebih kecil atau sama dengan</td><td>3 &lt;= 5</td><td>True (1)</td></tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh Program Perbandingan:</div>
+            <div class="code-block">
+<pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int x = 7, y = 10;
+
+    printf("x == y : %d\n", x == y);
+    printf("x != y : %d\n", x != y);
+    printf("x &gt; y  : %d\n", x &gt; y);
+    printf("x &lt; y  : %d\n", x &lt; y);
+    printf("x &gt;= y : %d\n", x &gt;= y);
+    printf("x &lt;= y : %d\n", x &lt;= y);
+
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+    </div>
+
+   <!-- Operator Logika -->
+<div class="subsection">
+    <h3>Operator Logika</h3>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Nama</th>
+                <th>Hasil</th>
+            </tr>
+            <tr>
+                <td>&&</td>
+                <td>AND</td>
+                <td>true jika kedua kondisi true</td>
+            </tr>
+            <tr>
+                <td>||</td>
+                <td>OR</td>
+                <td>true jika salah satu kondisi true</td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>NOT</td>
+                <td>Membalikkan nilai kebenaran</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <div class="example-title">Contoh Program Operator Logika</div>
+        <div class="code-block">
+<pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    bool x = true, y = false;
+
+    cout &lt;&lt; "=== Operator Logika ===" &lt;&lt; endl;
+    cout &lt;&lt; "x && y : " &lt;&lt; (x && y) &lt;&lt; endl; // AND
+    cout &lt;&lt; "x || y : " &lt;&lt; (x || y) &lt;&lt; endl; // OR
+    cout &lt;&lt; "!x     : " &lt;&lt; (!x) &lt;&lt; endl;     // NOT
+    cout &lt;&lt; "!y     : " &lt;&lt; (!y) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Latihan Soal -->
+<div class="subsection">
+    <h3>🎯 Latihan Soal Operator</h3>
+    <ol>
+        <li>Hitung hasil dari operasi berikut dan tampilkan di layar:
+            <ul>
+                <li>25 + 10</li>
+                <li>25 - 10</li>
+                <li>25 * 10</li>
+                <li>25 / 10</li>
+                <li>25 % 10</li>
+            </ul>
+        </li>
+        <li>Diberikan variabel <code>a = 7</code> dan <code>b = 3</code>.  
+            Cetak hasil perbandingan berikut:
+            <ul>
+                <li>a == b</li>
+                <li>a != b</li>
+                <li>a &gt; b</li>
+                <li>a &lt;= b</li>
+            </ul>
+        </li>
+        <li>Diberikan <code>x = true</code> dan <code>y = false</code>.  
+            Tampilkan hasil dari:
+            <ul>
+                <li>x && y</li>
+                <li>x || y</li>
+                <li>!x</li>
+                <li>!y</li>
+            </ul>
+        </li>
+        <li>Buat program kalkulator sederhana yang:
+            <ul>
+                <li>Membuat dua variabel integer, misalnya <code>a = 15</code> dan <code>b = 4</code></li>
+                <li>Tampilkan hasil penjumlahan, pengurangan, perkalian, pembagian</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+</div>
+
+
+
+
+        <!-- Control Section -->
+        <div class="content-section" id="control">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🔄 Struktur Kontrol</h2>
+            
+            <div class="subsection">
+                <h3>Pernyataan if-else</h3>
+                <p>Struktur kontrol if-else digunakan untuk membuat keputusan dalam program berdasarkan kondisi tertentu.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh if-else sederhana:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    int nilai;
+    
+    printf("Masukkan nilai: ");
+    scanf("%d", &nilai);
+    
+    if (nilai >= 80) {
+        printf("Grade: A\n");
+    }
+    else if (nilai >= 70) {
+        printf("Grade: B\n");
+    }
+    else if (nilai >= 60) {
+        printf("Grade: C\n");
+    }
+    else if (nilai >= 50) {
+        printf("Grade: D\n");
+    }
+    else {
+        printf("Grade: F\n");
+    }
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loops Section -->
+        <div class="content-section" id="loops">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">🔁 Perulangan (Loops)</h2>
+            
+            <div class="subsection">
+                <h3>Perulangan for</h3>
+                <p>Perulangan for digunakan ketika kita tahu berapa kali perulangan akan dijalankan.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Contoh for loop:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    // Menampilkan angka 1-10
+    printf("Angka 1 sampai 10:\n");
+    for (int i = 1; i <= 10; i++) {
+        printf("%d ", i);
+    }
+    printf("\n\n");
+    
+    // Menampilkan angka genap
+    printf("Angka genap 2 sampai 20:\n");
+    for (int i = 2; i <= 20; i += 2) {
+        printf("%d ", i);
+    }
+    printf("\n\n");
+    
+    // Countdown
+    printf("Countdown:\n");
+    for (int i = 10; i >= 1; i--) {
+        printf("%d ", i);
+    }
+    printf("Start!\n");
+    
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrays Section -->
+        <div class="content-section" id="arrays">
+            <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+            <h2 class="section-title">📊 Array & Pointer</h2>
+            
+            <div class="subsection">
+                <h3>Array Satu Dimensi</h3>
+                <p>Array adalah kumpulan elemen dengan tipe data yang sama, disimpan dalam lokasi memori yang berurutan.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Deklarasi dan Inisialisasi Array:</div>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    // Berbagai cara deklarasi array
+    int angka[5];  // Array kosong dengan 5 elemen
+    int nilai[] = {80, 90, 75, 88, 92};  // Ukuran otomatis
+    int data[5] = {1, 2, 3};  // Sisanya akan 0
+    
+    // Mengisi array
+    printf("Masukkan 5 angka:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Angka ke-%d: ", i+1);
+        scanf("%d", &angka[i]);
+    }
+    
+    // Menampilkan array
+    printf("\nAngka yang dimasukkan:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("angka[%d] = %d\n", i, angka[i]);
+    }
+    
+    // Mencari nilai maksimum
+    int max = angka[0];
+    for (int i = 1; i < 5; i++) {
+        if (angka[i] > max) {
+            max = angka[i];
+        }
+    }
+    printf("\nNilai maksimum: %d\n", max);
+    
+    return 0;
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pengenalan Pointer</h3>
+                    <p>Pointer adalah variabel yang menyimpan alamat memori dari variabel lain.</p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">Dasar-dasar Pointer:</div>
+                        <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    int angka = 42;
+    int *ptr;  // Deklarasi pointer
+    
+    ptr = &angka;  // ptr menunjuk ke alamat angka
+    
+    printf("Nilai angka: %d\n", angka);
+    printf("Alamat angka: %p\n", &angka);
+    printf("Nilai ptr: %p\n", ptr);
+    printf("Nilai yang ditunjuk ptr: %d\n", *ptr);
+    
+    // Mengubah nilai melalui pointer
+    *ptr = 100;
+    printf("\nSetelah *ptr = 100:\n");
+    printf("Nilai angka: %d\n", angka);
+    printf("Nilai yang ditunjuk ptr: %d\n", *ptr);
+    
+    // Pointer dan array
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *arr_ptr = arr;  // Nama array adalah pointer ke elemen pertama
+    
+    printf("\nArray menggunakan pointer:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d, *(arr_ptr + %d) = %d\n", 
+               i, arr[i], i, *(arr_ptr + i));
+    }
+    
+    return 0;
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        let currentProgress = 0;
+        const totalSections = 12;
+
+        function showSection(sectionId) {
+            // Hide navigation
+            document.getElementById('navigation').style.display = 'none';
+            
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // Smooth scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function showNavigation() {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show navigation
+            document.getElementById('navigation').style.display = 'block';
+            
+            // Smooth scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function updateProgress() {
+            const activeSection = document.querySelector('.content-section.active');
+            if (activeSection) {
+                const sectionIds = ['intro', 'basics', 'operators', 'control', 'loops', 'arrays', 'functions', 'structures', 'memory', 'files', 'sorting', 'advanced'];
+                const currentIndex = sectionIds.indexOf(activeSection.id);
+                const progressPercent = ((currentIndex + 1) / totalSections) * 100;
+                
+                document.getElementById('progressFill').style.width = progressPercent + '%';
+            } else {
+                document.getElementById('progressFill').style.width = '0%';
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add interactivity features
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    showNavigation();
+                }
+            });
+
+            // Double-click to copy code
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.addEventListener('dblclick', function() {
+                    const selection = window.getSelection();
+                    const range = document.createRange();
+                    range.selectNodeContents(this);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    
+                    try {
+                        document.execCommand('copy');
+                        this.style.backgroundColor = '#e8f5e8';
+                        setTimeout(() => {
+                            this.style.backgroundColor = '#f8f9fa';
+                        }, 500);
+                    } catch (err) {
+                        console.log('Copy failed');
+                    }
+                    
+                    selection.removeAllRanges();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
