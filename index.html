@@ -1823,6 +1823,82 @@ int main() {
             </ul>
         </div>
 
+         <div class="example-box">
+            <div class="example-title">Contoh Program tiket kereta api</div>
+            <div class="code-block">
+<pre><code>
+
+    #include <stdio.h>
+
+int main() {
+    int pilihan, jumlah, total;
+    int hargaEkonomi = 100000;
+    int hargaBisnis = 200000;
+    int hargaEksekutif = 300000;
+
+    printf("=== Pembelian Tiket Kereta ===\n");
+    printf("1. Ekonomi (Rp100.000)\n");
+    printf("2. Bisnis (Rp200.000)\n");
+    printf("3. Eksekutif (Rp300.000)\n");
+    printf("Masukkan pilihan (1/2/3): ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("Masukkan jumlah tiket Ekonomi: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaEkonomi;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 500000) {
+                printf("Tiket Ekonomi mahal\n");
+            } else {
+                printf("Tiket Ekonomi terjangkau\n");
+            }
+            break;
+
+        case 2:
+            printf("Masukkan jumlah tiket Bisnis: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaBisnis;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 1000000) {
+                printf("Tiket Bisnis mahal\n");
+            } else {
+                printf("Tiket Bisnis terjangkau\n");
+            }
+            break;
+
+        case 3:
+            printf("Masukkan jumlah tiket Eksekutif: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaEksekutif;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 1500000) {
+                printf("Tiket Eksekutif mahal\n");
+            } else {
+                printf("Tiket Eksekutif terjangkau\n");
+            }
+            break;
+
+        default:
+            printf("Pilihan tidak valid\n");
+    }
+
+    return 0;
+}
+  </code></pre>
+            </div>
+        </div>
+
+
+
+
+
+
+
         <div class="exercise-box">
             <h4>Latihan Praktek</h4>
             <ul>
