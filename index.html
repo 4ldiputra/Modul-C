@@ -1837,6 +1837,105 @@ int main() {
                 </li>
             </ul>
         </div>
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program simulasi ATM dengan menu:
+                    <br>1. Cek Saldo  
+                    2. Tarik Tunai  
+                    3. Setor Tunai  
+                    4. Keluar  
+                    <br>Gunakan percabangan untuk menampilkan hasil sesuai menu yang dipilih.  
+                    <br>Saldo awal misalnya Rp1.000.000.  
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
+
+         <div class="example-box">
+            <div class="example-title">Contoh switch-case dengan if-else:</div>
+            <div class="code-block">
+<pre><code>
+    #include <stdio.h>
+
+int main() {
+    int saldo = 1000000; // saldo awal Rp1.000.000
+    int pilihan, jumlah;
+
+    printf("\n=== MENU ATM ===\n");
+    printf("1. Cek Saldo\n");
+    printf("2. Tarik Tunai\n");
+    printf("3. Setor Tunai\n");
+    printf("4. Keluar\n");
+    printf("Pilih menu: ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("Saldo Anda: Rp%d\n", saldo);
+            break;
+        case 2:
+            printf("Masukkan jumlah tarik: Rp");
+            scanf("%d", &jumlah);
+            if (jumlah <= saldo) {
+                saldo -= jumlah;
+                printf("Tarik tunai berhasil. Saldo sekarang: Rp%d\n", saldo);
+            } else {
+                printf("Saldo tidak cukup!\n");
+            }
+            break;
+        case 3:
+            printf("Masukkan jumlah setor: Rp");
+            scanf("%d", &jumlah);
+            if (jumlah > 0) {
+                saldo += jumlah;
+                printf("Setor tunai berhasil. Saldo sekarang: Rp%d\n", saldo);
+            } else {
+                printf("Jumlah setor harus lebih dari 0!\n");
+            }
+            break;
+        case 4:
+            printf("Terima kasih telah menggunakan ATM.\n");
+            break;
+        default:
+            printf("Pilihan tidak valid!\n");
+    }
+
+    return 0;
+}
+       
+</code></pre>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="exercise-box">
+    <h4>Latihan Praktek</h4>
+    <ul>
+        <li>
+            Buat program simulasi <strong>Dompet Digital</strong> dengan menu:  
+            <br>1. Cek Saldo  
+            <br>2. Top Up  
+            <br>3. Bayar Belanja  
+            <br>4. Keluar  
+            <br>Saldo awal Rp500.000. Gunakan percabangan untuk menampilkan hasil sesuai pilihan.
+        </li>
+    </ul>
+</div>
+
+
     </div>
 </div>
 
