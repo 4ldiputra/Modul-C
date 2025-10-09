@@ -1,0 +1,184 @@
+ <!-- Operators Section -->
+<div class="content-section" id="operators">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">⚡ Operator & Aritmatika</h2>
+    
+    <div class="subsection">
+        <h3>Operator Aritmatika</h3>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Operasi</th>
+                    <th>Contoh</th>
+                    <th>Hasil</th>
+                </tr>
+                <tr><td>+</td><td>Penjumlahan</td><td>5 + 3</td><td>8</td></tr>
+                <tr><td>-</td><td>Pengurangan</td><td>5 - 3</td><td>2</td></tr>
+                <tr><td>*</td><td>Perkalian</td><td>5 * 3</td><td>15</td></tr>
+                <tr><td>/</td><td>Pembagian</td><td>10 / 3</td><td>3 (integer)</td></tr>
+                <tr><td>%</td><td>Modulus (sisa bagi)</td><td>10 % 3</td><td>1</td></tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Program Kalkulator Sederhana:</div>
+            <div class="code-block">
+<pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 15, b = 4;
+    
+    printf("a = %d, b = %d\n", a, b);
+    printf("a + b = %d\n", a + b);
+    printf("a - b = %d\n", a - b);
+    printf("a * b = %d\n", a * b);
+    printf("a / b = %d\n", a / b);        // Pembagian integer
+    printf("a / b = %.2f\n", (float)a / b); // Pembagian float
+    printf("a %% b = %d\n", a % b);       // Modulus
+    
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Operator Perbandingan -->
+    <div class="subsection">
+        <h3>Operator Perbandingan</h3>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Operasi</th>
+                    <th>Contoh</th>
+                    <th>Hasil</th>
+                </tr>
+                <tr><td>==</td><td>Sama dengan</td><td>5 == 5</td><td>True (1)</td></tr>
+                <tr><td>!=</td><td>Tidak sama dengan</td><td>5 != 3</td><td>True (1)</td></tr>
+                <tr><td>&gt;</td><td>Lebih besar</td><td>5 &gt; 3</td><td>True (1)</td></tr>
+                <tr><td>&lt;</td><td>Lebih kecil</td><td>3 &lt; 5</td><td>True (1)</td></tr>
+                <tr><td>&gt;=</td><td>Lebih besar atau sama dengan</td><td>5 &gt;= 5</td><td>True (1)</td></tr>
+                <tr><td>&lt;=</td><td>Lebih kecil atau sama dengan</td><td>3 &lt;= 5</td><td>True (1)</td></tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh Program Perbandingan:</div>
+            <div class="code-block">
+<pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int x = 7, y = 10;
+
+    printf("x == y : %d\n", x == y);
+    printf("x != y : %d\n", x != y);
+    printf("x &gt; y  : %d\n", x &gt; y);
+    printf("x &lt; y  : %d\n", x &lt; y);
+    printf("x &gt;= y : %d\n", x &gt;= y);
+    printf("x &lt;= y : %d\n", x &lt;= y);
+
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+    </div>
+
+   <!-- Operator Logika -->
+<div class="subsection">
+    <h3>Operator Logika</h3>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Nama</th>
+                <th>Hasil</th>
+            </tr>
+            <tr>
+                <td>&&</td>
+                <td>AND</td>
+                <td>true jika kedua kondisi true</td>
+            </tr>
+            <tr>
+                <td>||</td>
+                <td>OR</td>
+                <td>true jika salah satu kondisi true</td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>NOT</td>
+                <td>Membalikkan nilai kebenaran</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="example-box">
+        <div class="example-title">Contoh Program Operator Logika</div>
+        <div class="code-block">
+<pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    bool x = true, y = false;
+
+    cout &lt;&lt; "=== Operator Logika ===" &lt;&lt; endl;
+    cout &lt;&lt; "x && y : " &lt;&lt; (x && y) &lt;&lt; endl; // AND
+    cout &lt;&lt; "x || y : " &lt;&lt; (x || y) &lt;&lt; endl; // OR
+    cout &lt;&lt; "!x     : " &lt;&lt; (!x) &lt;&lt; endl;     // NOT
+    cout &lt;&lt; "!y     : " &lt;&lt; (!y) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Latihan Soal -->
+<div class="subsection">
+    <h3>🎯 Latihan Soal Operator</h3>
+    <ol>
+        <li>Hitung hasil dari operasi berikut dan tampilkan di layar:
+            <ul>
+                <li>25 + 10</li>
+                <li>25 - 10</li>
+                <li>25 * 10</li>
+                <li>25 / 10</li>
+                <li>25 % 10</li>
+            </ul>
+        </li>
+        <li>Diberikan variabel <code>a = 7</code> dan <code>b = 3</code>.  
+            Cetak hasil perbandingan berikut:
+            <ul>
+                <li>a == b</li>
+                <li>a != b</li>
+                <li>a &gt; b</li>
+                <li>a &lt;= b</li>
+            </ul>
+        </li>
+        <li>Diberikan <code>x = true</code> dan <code>y = false</code>.  
+            Tampilkan hasil dari:
+            <ul>
+                <li>x && y</li>
+                <li>x || y</li>
+                <li>!x</li>
+                <li>!y</li>
+            </ul>
+        </li>
+        <li>Buat program kalkulator sederhana yang:
+            <ul>
+                <li>Membuat dua variabel integer, misalnya <code>a = 15</code> dan <code>b = 4</code></li>
+                <li>Tampilkan hasil penjumlahan, pengurangan, perkalian, pembagian</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+</div>
+
+<!-- Akhir Operator -->

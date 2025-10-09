@@ -1,0 +1,237 @@
+<div class="content-section" id="loops">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">🔁 Perulangan (Loops)</h2>
+    
+    <div class="subsection">
+        <h3>5.1 For Loop</h3>
+        <p>For loop digunakan untuk iterasi dengan jumlah perulangan yang sudah diketahui.</p>
+
+        <div class="example-box">
+            <div class="example-title">Struktur for loop:</div>
+            <pre><code>for (inisialisasi; kondisi; increment/decrement) {
+    // kode yang akan diulang
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh for loop ascending (1-5):</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 1; i &lt;= 5; i++) {
+        printf("%d ", i);
+    }
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh for loop descending (5-1):</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 5; i &gt;= 1; i--) {
+        printf("%d ", i);
+    }
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Latihan for loop ascending 1-100:</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 1; i &lt;= 100; i++) {
+        printf("%d ", i);
+    }
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program descending dari 100 ke 1 menggunakan for loop.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>5.2 While Loop</h3>
+        <p>While loop digunakan ketika jumlah perulangan belum diketahui, tapi tergantung kondisi.</p>
+
+        <div class="example-box">
+            <div class="example-title">Contoh while loop:</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int j = 1;
+    while (j &lt;= 5) {
+        printf("%d ", j);
+        j++;
+    }
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>5.3 Do-While Loop</h3>
+        <p>Do-while loop mirip dengan while, tapi perulangan dijalankan minimal sekali.</p>
+
+        <div class="example-box">
+            <div class="example-title">Contoh do-while loop:</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int k = 1;
+    do {
+        printf("%d ", k);
+        k++;
+    } while (k &lt;= 5);
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>5.4 Contoh Do-While dengan Switch-Case</h3>
+        <p>Contoh penggunaan do-while loop dengan menu sederhana menggunakan switch-case.</p>
+
+        <div class="example-box">
+            <div class="example-title">Contoh do-while + switch-case:</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int pilihan;
+
+    do {
+        printf("=== Menu Sederhana ===\n");
+        printf("1. Cetak Hello\n");
+        printf("2. Cetak Dunia\n");
+        printf("3. Keluar\n");
+        printf("Masukkan pilihan: ");
+        scanf("%d", &amp;pilihan);
+
+        switch (pilihan) {
+            case 1:
+                printf("Hello!\n");
+                break;
+            case 2:
+                printf("Dunia!\n");
+                break;
+            case 3:
+                printf("Keluar dari program.\n");
+                break;
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
+
+        printf("\n"); // biar lebih rapi
+
+    } while (pilihan != 3);
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>5.5 Nested Loop</h3>
+        <p>Nested loop adalah perulangan bersarang, yaitu for/while di dalam for/while lainnya.</p>
+
+        <div class="example-box">
+            <div class="example-title">Contoh pola bintang segitiga:</div>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    for (int i = 1; i &lt;= 5; i++) {
+        for (int j = 1; j &lt;= i; j++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Latihan Praktek</h4>
+        <ul>
+            <li>Buat program yang menampilkan bilangan ganjil dari 1 sampai N.</li>
+            <div class="example-box">
+                <div class="example-title">Jawaban:</div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int N;
+    printf("Masukkan bilangan N: ");
+    scanf("%d", &N);
+
+    printf("Bilangan ganjil dari 1 sampai %d:\n", N);
+    for (int i = 1; i &lt;= N; i++) {
+        if (i % 2 != 0) {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}</code></pre>
+            </div>
+
+            <li>Seorang anak menabung Rp1000 di hari pertama, dan bertambah Rp500 setiap hari berikutnya. Buat program untuk menghitung total tabungan setelah N hari.</li>
+            <div class="example-box">
+                <div class="example-title">Jawaban:</div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int N;
+    printf("Masukkan jumlah hari: ");
+    scanf("%d", &N);
+
+    int total = 0;
+    int tabungan = 1000;
+
+    for (int i = 1; i &lt;= N; i++) {
+        total += tabungan;
+        tabungan += 500;
+    }
+
+    printf("Total tabungan setelah %d hari = Rp%d\n", N, total);
+    return 0;
+}</code></pre>
+            </div>
+
+            <li>Seorang pelanggan berbelanja N kali. Setiap kali belanja Rp20.000. Jika total belanja mencapai Rp100.000 atau lebih, ia mendapat diskon Rp10.000. Hitung total pembayaran setelah N kali belanja.</li>
+            <div class="example-box">
+                <div class="example-title">Jawaban:</div>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int N;
+    printf("Masukkan jumlah belanja (N kali): ");
+    scanf("%d", &N);
+
+    int total = N * 20000;
+
+    if (total &gt;= 100000) {
+        total -= 10000;
+    }
+
+    printf("Total pembayaran = Rp%d\n", total);
+    return 0;
+}</code></pre>
+            </div>
+        </ul>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Latihan Praktek</h4>
+        <ul>
+            <li>Buat program yang menampilkan bilangan genap dari 1 sampai N.</li>
+            <li>Seorang anak membaca buku. Di hari pertama ia membaca 5 halaman, dan setiap hari berikutnya jumlah halaman yang dibaca bertambah 3 halaman. Buat program untuk menghitung total halaman yang dibaca setelah N hari.</li>
+            <li>Seorang pengendara mengisi bensin sebanyak N kali. Setiap kali isi bensin Rp50.000. Jika total pengisian mencapai Rp200.000 atau lebih, ia mendapat diskon Rp20.000. Hitung total biaya yang harus dibayar setelah N kali isi bensin.</li>
+        </ul>
+    </div>
+</div>

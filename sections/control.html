@@ -1,0 +1,407 @@
+<div class="content-section" id="control">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">🔀 Percabangan</h2>
+
+    <div class="subsection">
+        <h3>Pernyataan if-else</h3>
+        <p>Percabangan digunakan untuk membuat keputusan dalam program berdasarkan kondisi tertentu.</p>
+
+        <div class="example-box">
+            <div class="example-title">Struktur dasar if-else:</div>
+            <div class="code-block">
+<pre><code>if (kondisi) {
+    // Kode jika kondisi benar
+} else {
+    // Kode jika kondisi salah
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh if-else sederhana:</div>
+            <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int angka;
+    printf("Masukkan sebuah angka: ");
+    scanf("%d", &amp;angka);
+
+    if (angka % 2 == 0) {
+        printf("Angka genap\n");
+    } else {
+        printf("Angka ganjil\n");
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program dalam bahasa C yang meminta pengguna memasukkan bilangan bulat.</li>
+                <li>Tentukan apakah bilangan tersebut positif atau negatif, lalu tampilkan hasilnya.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Pernyataan if-else if-else</h3>
+
+        <div class="example-box">
+            <div class="example-title">Struktur dasar if-else if-else:</div>
+            <div class="code-block">
+<pre><code>if (kondisi1) {
+    // Kode jika kondisi1 benar
+} else if (kondisi2) {
+    // Kode jika kondisi2 benar
+} else {
+    // Kode jika semua kondisi salah
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh if-else if-else:</div>
+            <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int num;
+    printf("Masukkan sebuah angka: ");
+    scanf("%d", &amp;num);
+
+    if (num > 0) {
+        printf("Angka positif\n");
+    } else if (num < 0) {
+        printf("Angka negatif\n");
+    } else {
+        printf("Angka nol\n");
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program untuk menentukan kategori umur:
+                    <br>&lt; 13 → Anak-anak  
+                    13–17 → Remaja  
+                    18–59 → Dewasa  
+                    ≥ 60 → Lansia
+                </li>
+            </ul>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek Grade</h4>
+            <ul>
+                <li>Buat program yang menentukan grade berdasarkan nilai:
+                    <br>A: 90–100  
+                    B: 80–89  
+                    C: 70–79  
+                    D: 60–69  
+                    E: &lt;60
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Pernyataan switch-case</h3>
+        <p>Switch case digunakan untuk percabangan multi-kondisi yang lebih efisien daripada if-else bertingkat.</p>
+
+        <div class="example-box">
+            <div class="example-title">Struktur dasar switch-case:</div>
+            <div class="code-block">
+<pre><code>switch (ekspresi) {
+    case nilai1:
+        // Kode jika ekspresi == nilai1
+        break;
+    case nilai2:
+        // Kode jika ekspresi == nilai2
+        break;
+    default:
+        // Kode jika tidak ada case yang cocok
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh switch-case sederhana:</div>
+            <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int pilihan;
+    printf("Pilih menu (1-3): ");
+    scanf("%d", &amp;pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("Anda memilih menu 1\n");
+            break;
+        case 2:
+            printf("Anda memilih menu 2\n");
+            break;
+        case 3:
+            printf("Anda memilih menu 3\n");
+            break;
+        default:
+            printf("Pilihan tidak valid\n");
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh switch-case dengan if-else:</div>
+            <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int menu, nilai;
+    printf("Pilih mata pelajaran (1=Matematika, 2=Bahasa): ");
+    scanf("%d", &amp;menu);
+
+    switch (menu) {
+        case 1:
+            printf("Masukkan nilai Matematika: ");
+            scanf("%d", &amp;nilai);
+            if (nilai >= 75) {
+                printf("Lulus Matematika\n");
+            } else {
+                printf("Tidak lulus Matematika\n");
+            }
+            break;
+        case 2:
+            printf("Masukkan nilai Bahasa: ");
+            scanf("%d", &amp;nilai);
+            if (nilai >= 70) {
+                printf("Lulus Bahasa\n");
+            } else {
+                printf("Tidak lulus Bahasa\n");
+            }
+            break;
+        default:
+            printf("Pilihan tidak valid\n");
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program pilihan buah:
+                    <br>1. Apel → input harga → mahal jika &gt; 20.000, terjangkau jika ≤ 20.000  
+                    2. Jeruk → input harga → mahal jika &gt; 15.000, terjangkau jika ≤ 15.000  
+                    Selain itu → "Pilihan tidak valid"
+                </li>
+            </ul>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program tiket kereta api:
+                    <br>1. Ekonomi (Rp100.000)  
+                    2. Bisnis (Rp200.000)  
+                    3. Eksekutif (Rp300.000)  
+                    <br>Hitung total harga sesuai jumlah tiket, lalu tentukan mahal/terjangkau dengan aturan:
+                    <br>Ekonomi: mahal jika &gt; 500.000  
+                    Bisnis: mahal jika &gt; 1.000.000  
+                    Eksekutif: mahal jika &gt; 1.500.000
+                </li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh Program tiket kereta api</div>
+            <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    int pilihan, jumlah, total;
+    int hargaEkonomi = 100000;
+    int hargaBisnis = 200000;
+    int hargaEksekutif = 300000;
+
+    printf("=== Pembelian Tiket Kereta ===\n");
+    printf("1. Ekonomi (Rp100.000)\n");
+    printf("2. Bisnis (Rp200.000)\n");
+    printf("3. Eksekutif (Rp300.000)\n");
+    printf("Masukkan pilihan (1/2/3): ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("Masukkan jumlah tiket Ekonomi: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaEkonomi;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 500000) {
+                printf("Tiket Ekonomi mahal\n");
+            } else {
+                printf("Tiket Ekonomi terjangkau\n");
+            }
+            break;
+
+        case 2:
+            printf("Masukkan jumlah tiket Bisnis: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaBisnis;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 1000000) {
+                printf("Tiket Bisnis mahal\n");
+            } else {
+                printf("Tiket Bisnis terjangkau\n");
+            }
+            break;
+
+        case 3:
+            printf("Masukkan jumlah tiket Eksekutif: ");
+            scanf("%d", &jumlah);
+            total = jumlah * hargaEksekutif;
+            printf("Total harga: Rp%d\n", total);
+
+            if (total > 1500000) {
+                printf("Tiket Eksekutif mahal\n");
+            } else {
+                printf("Tiket Eksekutif terjangkau\n");
+            }
+            break;
+
+        default:
+            printf("Pilihan tidak valid\n");
+    }
+
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program tiket bioskop:
+                    <br>1. Reguler (Rp50.000)  
+                    2. VIP (Rp100.000)  
+                    3. VVIP (Rp150.000)  
+                    <br>Hitung total harga sesuai jumlah tiket, lalu tentukan mahal/terjangkau dengan aturan:
+                    <br>Reguler: mahal jika &gt; 200.000  
+                    VIP: mahal jika &gt; 400.000  
+                    VVIP: mahal jika &gt; 600.000
+                </li>
+            </ul>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>Buat program simulasi ATM dengan menu:
+                    <br>1. Cek Saldo  
+                    2. Tarik Tunai  
+                    3. Setor Tunai  
+                    4. Keluar  
+                    <br>Gunakan percabangan untuk menampilkan hasil sesuai menu yang dipilih.  
+                    <br>Saldo awal misalnya Rp1.000.000.  
+                </li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh switch-case dengan if-else:</div>
+            <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    int saldo = 1000000; // saldo awal Rp1.000.000
+    int pilihan, jumlah;
+
+    printf("\n=== MENU ATM ===\n");
+    printf("1. Cek Saldo\n");
+    printf("2. Tarik Tunai\n");
+    printf("3. Setor Tunai\n");
+    printf("4. Keluar\n");
+    printf("Pilih menu: ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("Saldo Anda: Rp%d\n", saldo);
+            break;
+        case 2:
+            printf("Masukkan jumlah tarik: Rp");
+            scanf("%d", &jumlah);
+            if (jumlah <= saldo) {
+                saldo -= jumlah;
+                printf("Tarik tunai berhasil. Saldo sekarang: Rp%d\n", saldo);
+            } else {
+                printf("Saldo tidak cukup!\n");
+            }
+            break;
+        case 3:
+            printf("Masukkan jumlah setor: Rp");
+            scanf("%d", &jumlah);
+            if (jumlah > 0) {
+                saldo += jumlah;
+                printf("Setor tunai berhasil. Saldo sekarang: Rp%d\n", saldo);
+            } else {
+                printf("Jumlah setor harus lebih dari 0!\n");
+            }
+            break;
+        case 4:
+            printf("Terima kasih telah menggunakan ATM.\n");
+            break;
+        default:
+            printf("Pilihan tidak valid!\n");
+    }
+
+    return 0;
+}
+</code></pre>
+            </div>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>
+                    Buat program simulasi <strong>Dompet Digital</strong> dengan menu:  
+                    <br>1. Cek Saldo  
+                    <br>2. Top Up  
+                    <br>3. Bayar Belanja  
+                    <br>4. Keluar  
+                    <br>Saldo awal Rp500.000. Gunakan percabangan untuk menampilkan hasil sesuai pilihan.
+                </li>
+            </ul>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li>
+                    Buat program simulasi <strong>Kantin Sekolah</strong> dengan menu:  
+                    <br>1. Lihat Saldo Kartu  
+                    <br>2. Beli Nasi Goreng (Rp15.000)  
+                    <br>3. Beli Teh Manis (Rp5.000)  
+                    <br>4. Keluar  
+                    <br>Saldo awal Rp30.000. Hitung sisa saldo setelah transaksi.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

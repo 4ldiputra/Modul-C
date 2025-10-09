@@ -1,0 +1,656 @@
+<div class="content-section" id="arrays">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">📊 Array & String</h2>
+    
+    <div class="subsection">
+        <h3>6.1 Array</h3>
+        
+        <div class="highlight">
+            <p><strong>Array</strong> adalah struktur data yang digunakan untuk menyimpan kumpulan elemen dengan tipe data yang sama dalam lokasi memori yang berdekatan.</p>
+        </div>
+
+        <h4>Deklarasi dan Inisialisasi Array</h4>
+        <div class="code-block">
+<pre><code>// Deklarasi array
+int numbers[5];
+
+// Inisialisasi saat deklarasi
+int numbers[5] = {1, 2, 3, 4, 5};
+
+// Inisialisasi sebagian
+int numbers[5] = {1, 2}; // sisanya akan diisi 0</code></pre>
+        </div>
+
+        <h4>Mengakses Elemen Array</h4>
+        <div class="code-block">
+<pre><code>int numbers[5] = {10, 20, 30, 40, 50};
+
+// Mengakses elemen (indeks dimulai dari 0)
+printf("%d\n", numbers[0]); // Output: 10
+printf("%d\n", numbers[4]); // Output: 50
+
+// Mengubah nilai elemen
+numbers[2] = 35;</code></pre>
+        </div>
+
+        <h4>Pemanggilan Array dengan Perulangan</h4>
+        <div class="code-block">
+<pre><code>int numbers[5] = {10, 20, 30, 40, 50};
+
+for (int i = 0; i < 5; i++) {
+    printf("%d ", numbers[i]);
+}
+// Output: 10 20 30 40 50</code></pre>
+        </div>
+
+        <h4>Input dari User ke Array</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int data[5];
+    for (int i = 0; i < 5; i++) {
+        printf("Masukkan elemen ke-%d: ", i);
+        scanf("%d", &data[i]);
+    }
+
+    printf("Isi array: ");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", data[i]);
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Menghitung Jumlah Elemen dengan sizeof</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int numbers[5] = {10, 20, 30, 40, 50};
+    int panjang = sizeof(numbers) / sizeof(numbers[0]);
+
+    printf("Jumlah elemen array = %d\n", panjang);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Mencari Nilai Terbesar dalam Array</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int numbers[5] = {7, 2, 9, 4, 6};
+    int maks = numbers[0];
+
+    for (int i = 1; i < 5; i++) {
+        if (numbers[i] > maks) {
+            maks = numbers[i];
+        }
+    }
+
+    printf("Nilai terbesar = %d\n", maks);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 1:</strong> Seorang guru ingin menyimpan nilai ujian 5 siswa di dalam array, lalu mencari:
+                    <ul>
+                        <li>Nilai tertinggi.</li>
+                        <li>Nilai terendah.</li>
+                        <li>Rata-rata nilai siswa.</li>
+                    </ul>
+                    Buat program dengan input nilai dari user dan tampilkan hasilnya.
+                </li>
+            </ul>
+        </div>
+
+        <h4>Contoh Program Nilai Siswa</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int nilai[5];
+    int maks, min, total = 0;
+    float rata;
+
+    // Input nilai siswa
+    for (int i = 0; i < 5; i++) {
+        printf("Masukkan nilai siswa ke-%d: ", (i + 1));
+        scanf("%d", &nilai[i]);
+    }
+
+    // Asumsikan nilai awal sebagai acuan
+    maks = nilai[0];
+    min = nilai[0];
+
+    // Proses mencari maks, min, dan total
+    for (int i = 0; i < 5; i++) {
+        if (nilai[i] > maks) {
+            maks = nilai[i];
+        }
+        if (nilai[i] < min) {
+            min = nilai[i];
+        }
+        total += nilai[i];
+    }
+
+    // Hitung rata-rata
+    rata = (float) total / 5;
+
+    // Tampilkan hasil
+    printf("\nNilai tertinggi = %d\n", maks);
+    printf("Nilai terendah  = %d\n", min);
+    printf("Rata-rata nilai = %.2f\n", rata);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek - Soal Mirip SOAL 1</h4>
+            <ul>
+                <li><strong>SOAL 1A:</strong> Gaji Karyawan
+                    <ul>
+                        <li>Manajer perusahaan ingin menyimpan gaji 6 karyawan di dalam array.</li>
+                        <li>Tampilkan gaji tertinggi.</li>
+                        <li>Tampilkan gaji terendah.</li>
+                        <li>Hitung rata-rata gaji karyawan.</li>
+                        <li>Buat program dengan input gaji dari user.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 2:</strong> Skor Permainan
+                    <ul>
+                        <li>Ada 10 skor permainan yang disimpan dalam array: {85, 70, 90, 95, 60, 88, 76, 92, 100, 67}.</li>
+                        <li>Menampilkan semua skor.</li>
+                        <li>Mencari skor terbesar dan terkecil.</li>
+                        <li>Menghitung rata-rata skor.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h4>Contoh Program Skor Permainan</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int skor[10] = {85, 70, 90, 95, 60, 88, 76, 92, 100, 67};
+    int terbesar, terkecil, total = 0;
+    float rata;
+
+    printf("=== Program Skor Permainan ===\n\n");
+
+    // Tampilkan semua skor
+    printf("Daftar semua skor:\n");
+    for (int i = 0; i < 10; i++) {
+        printf("Skor ke-%d: %d\n", i + 1, skor[i]);
+    }
+
+    // Inisialisasi nilai terbesar dan terkecil
+    terbesar = skor[0];
+    terkecil = skor[0];
+
+    // Proses mencari terbesar, terkecil, dan total
+    for (int i = 0; i < 10; i++) {
+        if (skor[i] > terbesar) {
+            terbesar = skor[i];
+        }
+        if (skor[i] < terkecil) {
+            terkecil = skor[i];
+        }
+        total += skor[i];
+    }
+
+    // Hitung rata-rata
+    rata = (float) total / 10;
+
+    // Tampilkan hasil
+    printf("\n=== HASIL ANALISIS ===\n");
+    printf("Skor terbesar : %d\n", terbesar);
+    printf("Skor terkecil : %d\n", terkecil);
+    printf("Rata-rata skor: %.2f\n", rata);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 3:</strong> Suhu Harian
+                    <ul>
+                        <li>Catat suhu harian selama 7 hari ke dalam array.</li>
+                        <li>Program harus bisa menampilkan suhu tertinggi dalam seminggu.</li>
+                        <li>Menampilkan suhu terendah dalam seminggu.</li>
+                        <li>Menampilkan rata-rata suhu dalam seminggu.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h4>Contoh Program Suhu Harian</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    float suhu[7];
+    float tertinggi, terendah, total = 0, rata;
+    char *hari[] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"};
+
+    // Input suhu harian
+    printf("=== Program Suhu Harian ===\n");
+    printf("Masukkan suhu harian selama 7 hari:\n\n");
+    for (int i = 0; i < 7; i++) {
+        printf("Suhu hari %s: ", hari[i]);
+        scanf("%f", &suhu[i]);
+    }
+
+    // Inisialisasi nilai tertinggi dan terendah
+    tertinggi = suhu[0];
+    terendah = suhu[0];
+
+    // Proses mencari tertinggi, terendah, dan total
+    for (int i = 0; i < 7; i++) {
+        if (suhu[i] > tertinggi) {
+            tertinggi = suhu[i];
+        }
+        if (suhu[i] < terendah) {
+            terendah = suhu[i];
+        }
+        total += suhu[i];
+    }
+
+    // Hitung rata-rata
+    rata = total / 7;
+
+    // Tampilkan hasil
+    printf("\n=== HASIL ANALISIS SUHU ===\n");
+    printf("Suhu tertinggi dalam seminggu: %.2f°C\n", tertinggi);
+    printf("Suhu terendah dalam seminggu : %.2f°C\n", terendah);
+    printf("Rata-rata suhu dalam seminggu: %.2f°C\n", rata);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 4:</strong> Bilangan Genap dan Ganjil
+                    <ul>
+                        <li>Diberikan array berisi 10 bilangan.</li>
+                        <li>Memisahkan bilangan genap dan ganjil.</li>
+                        <li>Menampilkan jumlah bilangan genap dan jumlah bilangan ganjil.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h4>Contoh Program Bilangan Genap dan Ganjil</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int bilangan[10];
+    int genap[10], ganjil[10];
+    int jumlahGenap = 0, jumlahGanjil = 0;
+
+    // Input bilangan
+    printf("Masukkan 10 bilangan:\n");
+    for (int i = 0; i < 10; i++) {
+        printf("Bilangan ke-%d: ", i + 1);
+        scanf("%d", &bilangan[i]);
+    }
+
+    // Pisahkan genap dan ganjil
+    for (int i = 0; i < 10; i++) {
+        if (bilangan[i] % 2 == 0) {
+            genap[jumlahGenap] = bilangan[i];
+            jumlahGenap++;
+        } else {
+            ganjil[jumlahGanjil] = bilangan[i];
+            jumlahGanjil++;
+        }
+    }
+
+    // Tampilkan hasil
+    printf("\nBilangan Genap: ");
+    for (int i = 0; i < jumlahGenap; i++) {
+        printf("%d ", genap[i]);
+    }
+    printf("\nJumlah bilangan genap: %d\n", jumlahGenap);
+
+    printf("\nBilangan Ganjil: ");
+    for (int i = 0; i < jumlahGanjil; i++) {
+        printf("%d ", ganjil[i]);
+    }
+    printf("\nJumlah bilangan ganjil: %d\n", jumlahGanjil);
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>6.2 Array Dua Dimensi</h3>
+        <p>Array dua dimensi adalah array yang memiliki baris dan kolom, seperti tabel atau matriks.</p>
+
+        <h4>Deklarasi Array 2D</h4>
+        <div class="code-block">
+<pre><code>// Deklarasi array 2D
+#include <stdio.h>
+
+int main() {
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    printf("Isi matrix:\n");
+
+    for (int i = 0; i < 2; i++) {        // perulangan baris
+        for (int j = 0; j < 3; j++) {    // perulangan kolom
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");  // pindah baris
+    }
+
+    return 0;
+}
+</code></pre>
+        </div>
+
+        <h4>Input dan Output Array 2D</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int matrix[3][3];
+    int i, j;
+    
+    // Input matrix
+    printf("Masukkan elemen matrix 3x3:\n");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("Elemen [%d][%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    
+    // Tampilkan matrix
+    printf("\nMatrix yang dimasukkan:\n");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("%d\t", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Penjumlahan Dua Matrix</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int A[2][2] = {{1, 2}, {3, 4}};
+    int B[2][2] = {{5, 6}, {7, 8}};
+    int C[2][2];
+    int i, j;
+    
+    // Penjumlahan matrix
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+    
+    // Tampilkan hasil
+    printf("Matrix A:\n");
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d\t", A[i][j]);
+        }
+        printf("\n");
+    }
+    
+    printf("\nMatrix B:\n");
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d\t", B[i][j]);
+        }
+        printf("\n");
+    }
+    
+    printf("\nHasil A + B:\n");
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d\t", C[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek Array 2D</h4>
+            <ul>        
+                <li>Buat program untuk mengalikan dua matrix 2x2.</li>    
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>6.3 Pointer</h3>
+        <p>Pointer adalah variabel yang menyimpan alamat memori dari variabel lain.</p>
+
+        <h4>Deklarasi dan Penggunaan Pointer</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int angka = 42;
+    int *ptr;  // Deklarasi pointer
+    
+    ptr = &angka;  // ptr menunjuk ke alamat angka
+    
+    printf("Nilai angka: %d\n", angka);
+    printf("Alamat angka: %p\n", &angka);
+    printf("Nilai ptr: %p\n", ptr);
+    printf("Nilai yang ditunjuk ptr: %d\n", *ptr);
+    
+    // Mengubah nilai melalui pointer
+    *ptr = 100;
+    printf("\nSetelah *ptr = 100:\n");
+    printf("Nilai angka: %d\n", angka);
+    printf("Nilai yang ditunjuk ptr: %d\n", *ptr);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Pointer dan Array</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *arr_ptr = arr;  // Nama array adalah pointer ke elemen pertama
+    
+    printf("Array menggunakan pointer:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d, *(arr_ptr + %d) = %d\n", 
+               i, arr[i], i, *(arr_ptr + i));
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>6.4 String</h3>
+        <p>String adalah kumpulan karakter yang digunakan untuk menyimpan teks.</p>
+
+        <h4>Deklarasi String</h4>
+        <div class="code-block">
+<pre><code>// String adalah array of characters
+char nama[20] = "Budi";
+char alamat[] = "Jakarta";
+
+// Deklarasi tanpa inisialisasi
+char kota[50];</code></pre>
+        </div>
+
+        <h4>Input dan Output String</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    char nama[50];
+    
+    // Input string tanpa spasi
+    printf("Masukkan nama: ");
+    scanf("%s", nama);
+    printf("Nama: %s\n", nama);
+    
+    // Input string dengan spasi menggunakan fgets
+    char alamat[100];
+    printf("Masukkan alamat: ");
+    getchar();  // Membersihkan buffer
+    fgets(alamat, sizeof(alamat), stdin);
+    printf("Alamat: %s", alamat);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+
+        <h4>Program C Menghitung Panjang String</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char kalimat[100];
+
+    printf("Program C Menghitung Panjang String\n");
+    printf("-------------------------------------\n\n");
+
+    // Input string
+    printf("Masukkan String: ");
+    fgets(kalimat, sizeof(kalimat), stdin);
+    
+    // Hapus newline dari fgets
+    kalimat[strcspn(kalimat, "\n")] = 0;
+
+    // Output panjang string
+    printf("Panjang string adalah: %lu\n", strlen(kalimat));
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <p><strong>Topik:</strong> String</p>
+            <p><strong>Tujuan:</strong> Menghitung panjang string</p>
+            <p><strong>Soal:</strong> Budi ingin mengetahui berapa banyak karakter dalam pesan yang ia tulis untuk sahabatnya. Buatlah program C yang meminta Budi untuk memasukkan pesannya, kemudian menampilkan panjang pesan tersebut (jumlah karakter termasuk spasi).</p>
+        </div>
+
+        <h4>Program Manipulasi String</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int main() {
+    char text[100];
+    int hurufBesar = 0, hurufKecil = 0, angka = 0, spasi = 0;
+
+    printf("Masukkan kalimat: ");
+    fgets(text, sizeof(text), stdin);
+
+    // Analisis karakter
+    for (int i = 0; text[i] != '\0'; i++) {
+        if (isupper(text[i])) {
+            hurufBesar++;
+        } else if (islower(text[i])) {
+            hurufKecil++;
+        } else if (isdigit(text[i])) {
+            angka++;
+        } else if (isspace(text[i])) {
+            spasi++;
+        }
+    }
+
+    printf("\n=== HASIL ANALISIS ===\n");
+    printf("Huruf besar: %d\n", hurufBesar);
+    printf("Huruf kecil: %d\n", hurufKecil);
+    printf("Angka: %d\n", angka);
+    printf("Spasi: %d\n", spasi);
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Program Cek Palindrome</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int main() {
+    char kata[100];
+    int panjang, isPalindrome = 1;
+
+    printf("Masukkan kata: ");
+    scanf("%s", kata);
+
+    panjang = strlen(kata);
+
+    // Ubah ke lowercase untuk perbandingan
+    for (int i = 0; i < panjang; i++) {
+        kata[i] = tolower(kata[i]);
+    }
+
+    // Cek palindrome
+    for (int i = 0; i < panjang / 2; i++) {
+        if (kata[i] != kata[panjang - 1 - i]) {
+            isPalindrome = 0;
+            break;
+        }
+    }
+
+    if (isPalindrome) {
+        printf("'%s' adalah palindrome\n", kata);
+    } else {
+        printf("'%s' bukan palindrome\n", kata);
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+
+    </div>
+</div>

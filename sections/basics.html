@@ -1,0 +1,68 @@
+<div class="content-section" id="basics">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">📝 Input/Output & Format</h2>
+    
+    <div class="subsection">
+        <h3>Fungsi printf() - Output</h3>
+        <p>Fungsi printf() digunakan untuk menampilkan output ke layar dengan berbagai format.</p>
+        
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Format Specifier</th>
+                    <th>Tipe Data</th>
+                    <th>Contoh</th>
+                </tr>
+                <tr>
+                    <td>%d atau %i</td>
+                    <td>Integer</td>
+                    <td>printf("%d", 42);</td>
+                </tr>
+                <tr>
+                    <td>%f</td>
+                    <td>Float</td>
+                    <td>printf("%.2f", 3.14);</td>
+                </tr>
+                <tr>
+                    <td>%c</td>
+                    <td>Character</td>
+                    <td>printf("%c", 'A');</td>
+                </tr>
+                <tr>
+                    <td>%s</td>
+                    <td>String</td>
+                    <td>printf("%s", "Hello");</td>
+                </tr>
+                <tr>
+                    <td>%x</td>
+                    <td>Hexadecimal</td>
+                    <td>printf("%x", 255);</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">Contoh Penggunaan printf():</div>
+            <div class="code-block">
+                <pre><code>
+#include <stdio.h>
+
+int main() {
+    int umur = 20;
+    float tinggi = 175.5;
+    char grade = 'A';
+    char nama[] = "Budi";
+    
+    printf("Nama: %s\n", nama);
+    printf("Umur: %d tahun\n", umur);
+    printf("Tinggi: %.1f cm\n", tinggi);
+    printf("Grade: %c\n", grade);
+    printf("Nilai dalam hex: %x\n", umur);
+    
+    return 0;
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
