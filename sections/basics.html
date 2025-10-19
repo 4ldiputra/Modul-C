@@ -64,5 +64,60 @@ int main() {
                 </code></pre>
             </div>
         </div>
+
+
+<!-- Contoh Program -->
+    <div class="example-box">
+        <div class="example-title">Contoh Lengkap Input dan Output:</div>
+        <div class="code-block">
+<pre><code>
+#include <stdio.h>
+
+int main() {
+    char nama[20];
+    int umur;
+    float tinggi;
+
+    // Input
+    printf("Masukkan nama: ");
+    scanf("%s", nama);
+    
+    printf("Masukkan umur: ");
+    scanf("%d", &umur);
+
+    printf("Masukkan tinggi badan: ");
+    scanf("%f", &tinggi);
+
+    // Output
+    printf("\n--- Data yang Dimasukkan ---\n");
+    printf("Nama   : %s\n", nama);
+    printf("Umur   : %d tahun\n", umur);
+    printf("Tinggi : %.2f cm\n", tinggi);
+
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+
+
+    <div class="subsection">
+    <h3>🎯 Latihan 1: Input & Output Data Diri</h3>
+    <p><strong>Tugas:</strong> Buat program untuk meminta input berikut dari pengguna:</p>
+    <ul>
+        <li>Nama lengkap</li>
+        <li>Umur</li>
+        <li>Asal kota</li>
+    </ul>
+    <p>Kemudian tampilkan hasil dengan format seperti ini:</p>
+    <pre>
+Halo, nama saya Budi.
+Saya berumur 18 tahun.
+Saya berasal dari Kota Bandung.
+    </pre>
+</div>
+
+
+
     </div>
 </div>
