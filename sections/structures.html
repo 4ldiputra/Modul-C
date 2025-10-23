@@ -1,0 +1,500 @@
+<div class="content-section" id="structures">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">🧱 Struct (Struktur) dalam C</h2>
+
+    <div class="subsection">
+        <h3>7.1 Definisi dan Penggunaan Struct</h3>
+
+        <div class="highlight">
+            <p><strong>Struct</strong> adalah tipe data buatan pengguna yang memungkinkan pengelompokan beberapa variabel dengan tipe data berbeda menjadi satu kesatuan logis.</p>
+        </div>
+
+        <h4>Membuat Struktur Data Sederhana</h4>
+        <p>Struct cocok untuk merepresentasikan entitas dunia nyata, seperti:</p>
+        <ol>
+            <li>Data buku: judul, pengarang, penerbit, tahun terbit</li>
+            <li>Data mahasiswa: nama, NIM, jurusan</li>
+            <li>Data karyawan: nama, ID, gaji</li>
+        </ol>
+
+        <h4>Deklarasi Struct</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Buku {
+    char judul[100];
+    char pengarang[100];
+    char penerbit[100];
+    int tahun_terbit;
+};</code></pre>
+        </div>
+
+        <h4>Mengisi dan Mengakses Anggota Struct</h4>
+        <div class="code-block">
+<pre><code>struct Buku buku1;
+
+// Mengisi data
+strcpy(buku1.judul, "Pemrograman C untuk Pemula");
+strcpy(buku1.pengarang, "Ahmad Fauzi");
+strcpy(buku1.penerbit, "Penerbit Informatika");
+buku1.tahun_terbit = 2022;
+
+// Menampilkan data
+printf("Judul: %s\n", buku1.judul);
+printf("Tahun: %d\n", buku1.tahun_terbit);</code></pre>
+        </div>
+
+        <h4>Inisialisasi Struct</h4>
+        <div class="code-block">
+<pre><code>// Saat deklarasi
+struct Buku buku2 = {"Dasar C", "Budi Santoso", "Erlangga", 2020};
+
+// Atau dengan penugasan field (C99+)
+struct Buku buku3 = {
+    .judul = "Struktur Data",
+    .pengarang = "Dian Pratiwi",
+    .penerbit = "Andi Publisher",
+    .tahun_terbit = 2021
+};</code></pre>
+        </div>
+
+        <h4>Contoh Program Dasar Struct</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Mahasiswa {
+    char nama[50];
+    char nim[15];
+    float ipk;
+};
+
+int main() {
+    struct Mahasiswa mhs1;
+    
+    strcpy(mhs1.nama, "Rina Wijaya");
+    strcpy(mhs1.nim, "23060123");
+    mhs1.ipk = 3.75;
+    
+    printf("Nama: %s\n", mhs1.nama);
+    printf("NIM : %s\n", mhs1.nim);
+    printf("IPK : %.2f\n", mhs1.ipk);
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>7.2 Array dari Struct</h3>
+        <p>Kita bisa membuat array berisi banyak struct untuk menyimpan data kolektif.</p>
+
+        <h4>Contoh: Daftar Mahasiswa</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Mahasiswa {
+    char nama[50];
+    char nim[15];
+    float ipk;
+};
+
+int main() {
+    struct Mahasiswa kelas[3] = {
+        {"Ali", "23060101", 3.5},
+        {"Budi", "23060102", 3.8},
+        {"Citra", "23060103", 3.9}
+    };
+    
+    printf("Daftar Mahasiswa:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d. %s (%s) - IPK: %.2f\n",
+               i+1, kelas[i].nama, kelas[i].nim, kelas[i].ipk);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Input Data ke Array Struct dari User</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Mahasiswa {
+    char nama[50];
+    char nim[15];
+    float ipk;
+};
+
+int main() {
+    struct Mahasiswa mhs[3];
+    
+    for (int i = 0; i < 3; i++) {
+        printf("Data mahasiswa ke-%d:\n", i+1);
+        printf("Nama: ");
+        fgets(mhs[i].nama, sizeof(mhs[i].nama), stdin);
+        mhs[i].nama[strcspn(mhs[i].nama, "\n")] = 0; // hapus newline
+        
+        printf("NIM: ");
+        fgets(mhs[i].nim, sizeof(mhs[i].nim), stdin);
+        mhs[i].nim[strcspn(mhs[i].nim, "\n")] = 0;
+        
+        printf("IPK: ");
+        scanf("%f", &mhs[i].ipk);
+        getchar(); // bersihkan buffer
+        printf("\n");
+    }
+    
+    printf("=== DAFTAR MAHASISWA ===\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Nama: %s\n", mhs[i].nama);
+        printf("NIM : %s\n", mhs[i].nim);
+        printf("IPK : %.2f\n\n", mhs[i].ipk);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>7.3 Struct Bersarang (Nested Struct)</h3>
+        <p>Struct bisa berisi struct lain untuk merepresentasikan data bertingkat.</p>
+
+        <h4>Contoh: Data Karyawan dengan Alamat</h4>
+        <div class="code-block">
+<pre><code>struct Alamat {
+    char jalan[100];
+    char kota[50];
+    char kode_pos[10];
+};
+
+struct Karyawan {
+    char nama[50];
+    int id;
+    float gaji;
+    struct Alamat alamat; // nested struct
+};</code></pre>
+        </div>
+
+        <h4>Penggunaan Nested Struct</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Alamat {
+    char jalan[100];
+    char kota[50];
+    char kode_pos[10];
+};
+
+struct Karyawan {
+    char nama[50];
+    int id;
+    float gaji;
+    struct Alamat alamat;
+};
+
+int main() {
+    struct Karyawan kary;
+    
+    printf("Nama: ");
+    fgets(kary.nama, sizeof(kary.nama), stdin);
+    kary.nama[strcspn(kary.nama, "\n")] = 0;
+    
+    printf("ID: ");
+    scanf("%d", &kary.id);
+    printf("Gaji: ");
+    scanf("%f", &kary.gaji);
+    getchar(); // bersihkan buffer
+    
+    printf("Alamat:\n");
+    printf("Jalan: ");
+    fgets(kary.alamat.jalan, sizeof(kary.alamat.jalan), stdin);
+    kary.alamat.jalan[strcspn(kary.alamat.jalan, "\n")] = 0;
+    
+    printf("Kota: ");
+    fgets(kary.alamat.kota, sizeof(kary.alamat.kota), stdin);
+    kary.alamat.kota[strcspn(kary.alamat.kota, "\n")] = 0;
+    
+    printf("Kode Pos: ");
+    fgets(kary.alamat.kode_pos, sizeof(kary.alamat.kode_pos), stdin);
+    kary.alamat.kode_pos[strcspn(kary.alamat.kode_pos, "\n")] = 0;
+    
+    printf("\n=== DATA KARYAWAN ===\n");
+    printf("Nama: %s\n", kary.nama);
+    printf("ID: %d\n", kary.id);
+    printf("Gaji: Rp %.2f\n", kary.gaji);
+    printf("Alamat: %s, %s %s\n",
+           kary.alamat.jalan, kary.alamat.kota, kary.alamat.kode_pos);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 1:</strong> Data Mahasiswa & Kontak
+                    <ul>
+                        <li>Buat <code>struct Kontak</code> dengan field: <code>email</code> (char[50]), <code>noHP</code> (char[15]).</li>
+                        <li>Buat <code>struct Mahasiswa</code> dengan: <code>nama</code>, <code>nim</code>, <code>jurusan</code>, dan <code>kontak</code> (bertipe <code>struct Kontak</code>).</li>
+                        <li>Input data 1 mahasiswa dari user.</li>
+                        <li>Tampilkan kembali datanya.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>7.4 Pencarian dalam Array Struct</h3>
+
+        <h4>Contoh: Cari Produk Berdasarkan Kode</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Produk {
+    char nama[50];
+    char kode[10];
+    float harga;
+    int stok;
+};
+
+int main() {
+    struct Produk daftar[5] = {
+        {"Laptop", "LP001", 15000000, 10},
+        {"Mouse", "MS001", 150000, 25},
+        {"Keyboard", "KB001", 500000, 15},
+        {"Monitor", "MN001", 2500000, 8},
+        {"Speaker", "SP001", 750000, 12}
+    };
+    
+    char cari[10];
+    printf("Cari kode produk: ");
+    scanf("%s", cari);
+    
+    int ditemukan = 0;
+    for (int i = 0; i < 5; i++) {
+        if (strcmp(daftar[i].kode, cari) == 0) {
+            printf("\nProduk ditemukan!\n");
+            printf("Nama  : %s\n", daftar[i].nama);
+            printf("Harga : Rp %.0f\n", daftar[i].harga);
+            printf("Stok  : %d\n", daftar[i].stok);
+            ditemukan = 1;
+            break;
+        }
+    }
+    
+    if (!ditemukan) {
+        printf("Produk tidak ditemukan.\n");
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 2:</strong> Data Buku Perpustakaan
+                    <ul>
+                        <li>Buat <code>struct Buku</code> dengan: <code>judul</code>, <code>pengarang</code>, <code>isbn</code>, <code>tahun</code>.</li>
+                        <li>Buat array untuk 10 buku.</li>
+                        <li>Input dari user.</li>
+                        <li>Tampilkan hanya buku dengan <code>tahun > 2010</code>.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>7.5 Struct dengan Array di Dalamnya</h3>
+
+        <h4>Contoh: Nilai Ujian Siswa</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Siswa {
+    char nama[50];
+    float nilai[5]; // array dalam struct
+};
+
+int main() {
+    struct Siswa siswa;
+    float total = 0;
+    
+    printf("Nama siswa: ");
+    fgets(siswa.nama, sizeof(siswa.nama), stdin);
+    siswa.nama[strcspn(siswa.nama, "\n")] = 0;
+    
+    printf("Masukkan 5 nilai:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Nilai %d: ", i+1);
+        scanf("%f", &siswa.nilai[i]);
+        total += siswa.nilai[i];
+    }
+    
+    float rata = total / 5;
+    
+    printf("\n=== RATA-RATA NILAI ===\n");
+    printf("Nama: %s\n", siswa.nama);
+    printf("Rata-rata: %.2f\n", rata);
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <p><strong>Tips Penggunaan Struct di C:</strong></p>
+        <ul>
+            <li>Gunakan <code>strcpy()</code> untuk menyalin string ke field <code>char[]</code>.</li>
+            <li>Gunakan <code>strcmp()</code> untuk membandingkan string.</li>
+            <li>Hindari <code>scanf("%s")</code> untuk input string ber-spasi — gunakan <code>fgets()</code>.</li>
+            <li>Bersihkan buffer newline dengan <code>getchar()</code> atau <code>strcspn()</code>.</li>
+            <li>Struct tidak bisa langsung dicetak/dibandingkan — akses field-nya satu per satu.</li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <p><strong>Kapan Menggunakan Struct?</strong> Gunakan struct saat kamu perlu mengelompokkan data heterogen (berbeda tipe) yang merepresentasikan satu entitas, seperti orang, produk, transaksi, atau dokumen.</p>
+    </div>
+   
+
+
+    <div class="subsection" style="margin-top: 30px;">
+    <h3>7.6 Union</h3>
+
+    <div class="highlight">
+        <p><strong>Union</strong> adalah tipe data buatan pengguna yang mirip dengan <code>struct</code>, tetapi semua anggotanya <strong>berbagi lokasi memori yang sama</strong>. Hanya satu anggota union yang dapat menyimpan nilai pada satu waktu.</p>
+    </div>
+
+    <h4>Deklarasi Union</h4>
+    <div class="code-block">
+<pre><code>#include <stdio.h>
+
+union Data {
+    int angka;
+    float pecahan;
+    char teks[20];
+};</code></pre>
+    </div>
+
+    <h4>Perbedaan Struct vs Union</h4>
+    <div class="note-box">
+        <ul>
+            <li><strong>Struct</strong>: Setiap anggota punya memori sendiri → total ukuran = jumlah semua anggota.</li>
+            <li><strong>Union</strong>: Semua anggota berbagi memori yang sama → total ukuran = ukuran anggota <em>terbesar</em>.</li>
+            <li>Di <code>union</code>, hanya <strong>satu nilai valid</strong> pada satu waktu. Menulis ke anggota lain akan <em>menimpa</em> nilai sebelumnya.</li>
+        </ul>
+    </div>
+
+    <h4>Contoh Penggunaan Union</h4>
+    <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+union Data {
+    int angka;
+    float pecahan;
+    char teks[20];
+};
+
+int main() {
+    union Data data;
+
+    // Simpan nilai integer
+    data.angka = 100;
+    printf("Nilai angka: %d\n", data.angka);
+
+    // Simpan nilai float → nilai integer HILANG!
+    data.pecahan = 3.14f;
+    printf("Nilai pecahan: %.2f\n", data.pecahan);
+    printf("Nilai angka sekarang: %d (tidak valid!)\n", data.angka);
+
+    // Simpan string
+    strcpy(data.teks, "C Union");
+    printf("Teks: %s\n", data.teks);
+
+    // Cetak ukuran union
+    printf("\nUkuran union: %zu byte\n", sizeof(data)); // = 20 (karena char[20])
+
+    return 0;
+}</code></pre>
+    </div>
+
+    <h4>Kapan Menggunakan Union?</h4>
+    <div class="highlight">
+        <p>Union berguna saat kamu ingin menyimpan <strong>salah satu dari beberapa tipe data</strong> dalam satu variabel, misalnya:</p>
+        <ul>
+            <li>Membaca data biner yang bisa berupa int, float, atau char.</li>
+            <li>Menghemat memori dalam sistem embedded.</li>
+            <li>Membuat parser atau interpreter sederhana.</li>
+        </ul>
+    </div>
+
+    <h4>Contoh Praktis: Simpan Tipe Data Dinamis</h4>
+    <div class="code-block">
+<pre><code>#include <stdio.h>
+
+// Enum untuk melacak tipe data yang aktif
+enum Tipe { INTEGER, FLOAT };
+
+// Union + struct untuk menyimpan nilai + tipenya
+struct NilaiDinamis {
+    enum Tipe tipe;
+    union {
+        int i;
+        float f;
+    } data;
+};
+
+int main() {
+    struct NilaiDinamis v;
+
+    // Simpan integer
+    v.tipe = INTEGER;
+    v.data.i = 42;
+    if (v.tipe == INTEGER) {
+        printf("Nilai: %d (integer)\n", v.data.i);
+    }
+
+    // Ganti ke float
+    v.tipe = FLOAT;
+    v.data.f = 2.71f;
+    if (v.tipe == FLOAT) {
+        printf("Nilai: %.2f (float)\n", v.data.f);
+    }
+
+    return 0;
+}</code></pre>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Latihan Praktek</h4>
+        <ul>
+            <li><strong>SOAL:</strong> Buat program yang menggunakan <code>union</code> untuk menyimpan:
+                <ul>
+                    <li>Sebuah bilangan bulat (<code>int</code>)</li>
+                    <li>Sebuah karakter (<code>char</code>)</li>
+                    <li>Sebuah bilangan pecahan (<code>float</code>)</li>
+                </ul>
+                Program harus:
+                <ol>
+                    <li>Meminta user memilih tipe data yang ingin dimasukkan.</li>
+                    <li>Input nilai sesuai pilihan.</li>
+                    <li>Tampilkan nilai tersebut.</li>
+                    <li>Cetak juga ukuran <code>union</code> tersebut.</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>

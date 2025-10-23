@@ -1,0 +1,253 @@
+<div class="content-section" id="functions">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">⚙️ Fungsi & Rekursi</h2>
+
+    <div class="subsection">
+        <h3>9.1 Pengertian Fungsi</h3>
+        
+        <div class="highlight">
+            <p><strong>Fungsi</strong> adalah blok kode yang dapat digunakan berulang kali untuk menjalankan tugas tertentu. Di C, setiap program harus memiliki fungsi <code>main()</code>. Fungsi dapat mengembalikan nilai (misal: <code>int</code>, <code>float</code>) atau tidak mengembalikan nilai sama sekali (<code>void</code>), yang disebut <strong>prosedur</strong>.</p>
+        </div>
+
+        <h4>Deklarasi dan Definisi Fungsi</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+// Prototipe fungsi (opsional tapi disarankan)
+int tambah(int a, int b);
+
+// Definisi fungsi
+int tambah(int a, int b) {
+    return a + b;
+}
+
+// Prosedur (fungsi void)
+void sapa() {
+    printf("Halo, dunia!\n");
+}
+
+int main() {
+    printf("5 + 3 = %d\n", tambah(5, 3));
+    sapa();
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Parameter dan Nilai Kembalian</h4>
+        <p>Di C, parameter dikirim secara <strong>pass-by-value</strong> — artinya nilai asli di luar fungsi tidak berubah kecuali menggunakan pointer.</p>
+
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+float hitungRata(float a, float b) {
+    return (a + b) / 2.0;
+}
+
+void tampilkanRata(float r) {
+    printf("Rata-rata: %.2f\n", r);
+}
+
+int main() {
+    float x = 8.5, y = 9.0;
+    float rata = hitungRata(x, y);
+    tampilkanRata(rata);
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>9.2 Fungsi dengan Array</h3>
+        <p>Fungsi sering digunakan untuk memproses array, seperti menghitung total, rata-rata, atau mencari nilai maksimum.</p>
+
+        <h4>Contoh: Hitung Total dan Rata-rata Nilai</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+// Fungsi menghitung total
+int totalNilai(int arr[], int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        total += arr[i];
+    }
+    return total;
+}
+
+// Fungsi menghitung rata-rata
+float rataNilai(int arr[], int n) {
+    return (float)totalNilai(arr, n) / n;
+}
+
+// Prosedur tampilkan semua nilai
+void tampilkanNilai(int arr[], int n) {
+    printf("Nilai: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int nilai[] = {80, 75, 90, 85, 95};
+    int jumlah = 5;
+
+    tampilkanNilai(nilai, jumlah);
+    printf("Total: %d\n", totalNilai(nilai, jumlah));
+    printf("Rata-rata: %.2f\n", rataNilai(nilai, jumlah));
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>9.3 Rekursi (Recursive Function)</h3>
+        
+        <div class="highlight">
+            <p><strong>Rekursi</strong> adalah teknik di mana sebuah fungsi memanggil dirinya sendiri. Setiap fungsi rekursif harus memiliki:</p>
+            <ul>
+                <li><strong>Kasus dasar (base case)</strong>: kondisi berhenti.</li>
+                <li><strong>Kasus rekursif</strong>: pemanggilan diri dengan parameter berubah.</li>
+            </ul>
+        </div>
+
+        <h4>Contoh 1: Faktorial</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int faktorial(int n) {
+    // Base case
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    // Recursive case
+    return n * faktorial(n - 1);
+}
+
+int main() {
+    int n;
+    printf("Masukkan angka: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Faktorial tidak didefinisikan untuk bilangan negatif.\n");
+    } else {
+        printf("%d! = %d\n", n, faktorial(n));
+    }
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Contoh 2: Deret Fibonacci</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int fibonacci(int n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+    printf("Fibonacci ke-: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Input tidak valid.\n");
+    } else {
+        printf("Fibonacci(%d) = %d\n", n, fibonacci(n));
+    }
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Peringatan:</strong> Rekursi yang terlalu dalam bisa menyebabkan <em>stack overflow</em>. Untuk kasus besar (misal Fibonacci n > 40), lebih baik gunakan pendekatan iteratif.</p>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>9.4 Contoh Program Lengkap: Analisis Nilai Siswa</h3>
+        <p>Gabungan fungsi, array, perulangan, percabangan, dan prosedur.</p>
+
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int cariMaks(int arr[], int n) {
+    int maks = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > maks) maks = arr[i];
+    }
+    return maks;
+}
+
+int cariMin(int arr[], int n) {
+    int min = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min) min = arr[i];
+    }
+    return min;
+}
+
+float hitungRata(int arr[], int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) total += arr[i];
+    return (float)total / n;
+}
+
+void tampilkanStatus(float rata) {
+    if (rata >= 75) {
+        printf("Status: LULUS 🎉\n");
+    } else {
+        printf("Status: TIDAK LULUS 😢\n");
+    }
+}
+
+int main() {
+    int n;
+    printf("Jumlah siswa: ");
+    scanf("%d", &n);
+
+    int nilai[n];
+    for (int i = 0; i < n; i++) {
+        printf("Nilai siswa ke-%d: ", i + 1);
+        scanf("%d", &nilai[i]);
+    }
+
+    printf("\n=== ANALISIS NILAI ===\n");
+    printf("Nilai tertinggi: %d\n", cariMaks(nilai, n));
+    printf("Nilai terendah : %d\n", cariMin(nilai, n));
+    float rata = hitungRata(nilai, n);
+    printf("Rata-rata      : %.2f\n", rata);
+    tampilkanStatus(rata);
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Latihan Praktek</h4>
+        <ul>
+            <li><strong>SOAL 1:</strong> Buat fungsi rekursif untuk menghitung pangkat bilangan bulat (misal: <code>pangkat(2, 3) = 8</code>).</li>
+            <li><strong>SOAL 2:</strong> Buat program yang menggunakan fungsi untuk:
+                <ul>
+                    <li>Input 5 bilangan ke dalam array.</li>
+                    <li>Cari bilangan genap menggunakan fungsi.</li>
+                    <li>Tampilkan jumlah bilangan genap dengan prosedur.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <p><strong>Tips Fungsi di C:</strong></p>
+        <ul>
+            <li>Selalu deklarasikan prototipe fungsi di atas <code>main()</code> jika definisinya di bawah.</li>
+            <li>Gunakan <code>void</code> untuk fungsi yang tidak mengembalikan nilai.</li>
+            <li>Untuk mengubah nilai variabel di luar fungsi, gunakan <strong>pointer</strong> (akan dibahas di materi pointer).</li>
+            <li>Hindari rekursi berlebihan — pertimbangkan versi iteratif untuk efisiensi.</li>
+        </ul>
+    </div>
+</div>
