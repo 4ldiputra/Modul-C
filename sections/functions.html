@@ -56,6 +56,54 @@ int main() {
         </div>
     </div>
 
+     <div class="subsection">
+        <h3>Fungsi Prosedur</h3>
+        <p>Fungsi sering digunakan untuk memproses array, seperti menghitung total, rata-rata, atau mencari nilai maksimum.</p>
+
+        <h4>Contoh: Program Luas & Keliling Lingkaran</h4>
+        <div class="code-block">
+<pre><code>
+    #include <stdio.h>
+#define M_PI 3.14159265358979323846
+
+// Fungsi untuk menghitung luas lingkaran
+double hitungLuas(double radius) {
+    return M_PI * radius * radius;
+}
+
+// Fungsi untuk menghitung keliling lingkaran
+double hitungKeliling(double radius) {
+    return 2 * M_PI * radius;
+}
+
+// Prosedur untuk menampilkan hasil
+void tampilkanHasil(double radius, double luas, double keliling) {
+    printf("=== HASIL PERHITUNGAN ===\n");
+    printf("Radius: %.2f\n", radius);
+    printf("Luas lingkaran: %.2f\n", luas);
+    printf("Keliling lingkaran: %.2f\n", keliling);
+}
+
+int main() {
+    double radius;
+
+    printf("Masukkan radius lingkaran: ");
+    scanf("%lf", &radius);
+
+    double luas = hitungLuas(radius);
+    double keliling = hitungKeliling(radius);
+
+    tampilkanHasil(radius, luas, keliling);
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+
+
+
+
+
     <div class="subsection">
         <h3>9.2 Fungsi dengan Array</h3>
         <p>Fungsi sering digunakan untuk memproses array, seperti menghitung total, rata-rata, atau mencari nilai maksimum.</p>
