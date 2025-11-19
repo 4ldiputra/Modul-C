@@ -1,0 +1,572 @@
+<div class="content-section" id="files">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">📁 File Processing dalam C</h2>
+
+    <div class="subsection">
+        <h3>8.1 Pengenalan File Processing</h3>
+
+        <div class="highlight">
+            <p><strong>File Processing</strong> adalah kemampuan program untuk membaca dan menulis data ke file eksternal. Ini memungkinkan data tetap tersimpan bahkan setelah program selesai dijalankan.</p>
+        </div>
+
+        <h4>Mengapa File Processing Penting?</h4>
+        <ul>
+            <li>Menyimpan data secara permanen (tidak hilang saat program ditutup)</li>
+            <li>Berbagi data antar program</li>
+            <li>Membuat sistem penyimpanan sederhana (database file)</li>
+            <li>Membaca konfigurasi atau log program</li>
+        </ul>
+
+        <h4>Tipe File dalam C</h4>
+        <div class="note-box">
+            <ul>
+                <li><strong>Text File:</strong> File berisi karakter yang bisa dibaca manusia (seperti .txt, .csv)</li>
+                <li><strong>Binary File:</strong> File berisi data dalam format biner (seperti .bin, .dat)</li>
+            </ul>
+            <p>Pada modul ini kita fokus pada <strong>Text File</strong>.</p>
+        </div>
+
+        <h4>Pointer FILE</h4>
+        <p>Untuk bekerja dengan file, kita menggunakan pointer bertipe <code>FILE*</code>:</p>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *filePointer;
+    // filePointer digunakan untuk mengakses file
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.2 Mode Pembukaan File</h3>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #2a2a2a;">
+                    <th style="border: 1px solid #444; padding: 10px;">Mode</th>
+                    <th style="border: 1px solid #444; padding: 10px;">Deskripsi</th>
+                    <th style="border: 1px solid #444; padding: 10px;">File Tidak Ada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"r"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Baca file (read)</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Error</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"w"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Tulis file (write) - hapus isi lama</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Dibuat baru</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"a"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Tambah ke akhir (append)</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Dibuat baru</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"r+"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Baca dan tulis</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Error</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"w+"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Baca dan tulis - hapus isi lama</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Dibuat baru</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #444; padding: 10px;"><code>"a+"</code></td>
+                    <td style="border: 1px solid #444; padding: 10px;">Baca dan tambah ke akhir</td>
+                    <td style="border: 1px solid #444; padding: 10px;">Dibuat baru</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="subsection">
+        <h3>8.3 Menulis ke File</h3>
+
+        <h4>Fungsi untuk Menulis</h4>
+        <ul>
+            <li><code>fprintf()</code> - Menulis dengan format (seperti printf)</li>
+            <li><code>fputs()</code> - Menulis string</li>
+            <li><code>fputc()</code> - Menulis satu karakter</li>
+        </ul>
+
+        <h4>Contoh: Menulis File Sederhana</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("catatan.txt", "w");
+    
+    // Cek apakah file berhasil dibuka
+    if (file == NULL) {
+        printf("Error: Tidak bisa membuka file!\n");
+        return 1;
+    }
+    
+    // Menulis ke file
+    fprintf(file, "Belajar C Programming\n");
+    fprintf(file, "File Processing sangat penting\n");
+    fprintf(file, "Ini baris ke-3\n");
+    
+    // Tutup file
+    fclose(file);
+    
+    printf("File berhasil ditulis!\n");
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Contoh: Menulis Data dari User</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("diary.txt", "w");
+    
+    if (file == NULL) {
+        printf("Error membuka file!\n");
+        return 1;
+    }
+    
+    char nama[50];
+    int umur;
+    
+    printf("Nama: ");
+    fgets(nama, sizeof(nama), stdin);
+    
+    printf("Umur: ");
+    scanf("%d", &umur);
+    
+    // Tulis ke file
+    fprintf(file, "Nama: %s", nama);
+    fprintf(file, "Umur: %d tahun\n", umur);
+    
+    fclose(file);
+    printf("Data tersimpan di diary.txt\n");
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Penting:</strong></p>
+            <ul>
+                <li>Selalu cek apakah <code>fopen()</code> mengembalikan <code>NULL</code></li>
+                <li>Selalu tutup file dengan <code>fclose()</code> setelah selesai</li>
+                <li>Mode <code>"w"</code> akan menghapus isi file lama!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.4 Membaca dari File</h3>
+
+        <h4>Fungsi untuk Membaca</h4>
+        <ul>
+            <li><code>fscanf()</code> - Membaca dengan format (seperti scanf)</li>
+            <li><code>fgets()</code> - Membaca satu baris</li>
+            <li><code>fgetc()</code> - Membaca satu karakter</li>
+        </ul>
+
+        <h4>Contoh: Membaca File Baris per Baris</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("catatan.txt", "r");
+    
+    if (file == NULL) {
+        printf("File tidak ditemukan!\n");
+        return 1;
+    }
+    
+    char baris[100];
+    
+    printf("Isi file:\n");
+    printf("===================\n");
+    
+    // Baca baris demi baris
+    while (fgets(baris, sizeof(baris), file) != NULL) {
+        printf("%s", baris);
+    }
+    
+    fclose(file);
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Contoh: Membaca dengan Format</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("data_mahasiswa.txt", "r");
+    
+    if (file == NULL) {
+        printf("File tidak ditemukan!\n");
+        return 1;
+    }
+    
+    char nama[50];
+    int nim;
+    float ipk;
+    
+    printf("Data Mahasiswa:\n");
+    
+    // Baca dengan format
+    while (fscanf(file, "%s %d %f", nama, &nim, &ipk) == 3) {
+        printf("Nama: %s, NIM: %d, IPK: %.2f\n", nama, nim, ipk);
+    }
+    
+    fclose(file);
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>Membaca Karakter demi Karakter</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("teks.txt", "r");
+    
+    if (file == NULL) {
+        printf("Error!\n");
+        return 1;
+    }
+    
+    char karakter;
+    
+    // Baca sampai akhir file (EOF)
+    while ((karakter = fgetc(file)) != EOF) {
+        printf("%c", karakter);
+    }
+    
+    fclose(file);
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.5 Mode Append - Menambah Data</h3>
+
+        <div class="highlight">
+            <p>Mode <code>"a"</code> (append) memungkinkan menambah data ke akhir file tanpa menghapus isi yang sudah ada.</p>
+        </div>
+
+        <h4>Contoh: Sistem Log Sederhana</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <time.h>
+
+int main() {
+    FILE *file = fopen("log.txt", "a");
+    
+    if (file == NULL) {
+        printf("Error!\n");
+        return 1;
+    }
+    
+    // Ambil waktu saat ini
+    time_t now;
+    time(&now);
+    
+    char aktivitas[100];
+    printf("Masukkan aktivitas: ");
+    fgets(aktivitas, sizeof(aktivitas), stdin);
+    
+    // Tulis log dengan timestamp
+    fprintf(file, "[%s] %s", ctime(&now), aktivitas);
+    
+    fclose(file);
+    printf("Log berhasil ditambahkan!\n");
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Latihan Praktek</h4>
+            <ul>
+                <li><strong>SOAL 1:</strong> Program Catatan Harian
+                    <ul>
+                        <li>Buat program yang meminta input catatan dari user</li>
+                        <li>Simpan catatan ke file <code>diary.txt</code> dengan mode append</li>
+                        <li>Tambahkan tanggal otomatis di setiap catatan</li>
+                        <li>Buat menu: 1) Tambah catatan, 2) Lihat semua catatan, 3) Keluar</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.6 Menyimpan Struct ke File</h3>
+
+        <div class="highlight">
+            <p>Kita bisa menyimpan data struct ke file untuk membuat sistem penyimpanan data yang lebih kompleks.</p>
+        </div>
+
+        <h4>Contoh: Database Mahasiswa Sederhana</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Mahasiswa {
+    char nama[50];
+    char nim[20];
+    float ipk;
+};
+
+// Fungsi untuk menyimpan mahasiswa
+void simpanMahasiswa() {
+    FILE *file = fopen("mahasiswa.txt", "a");
+    if (file == NULL) {
+        printf("Error!\n");
+        return;
+    }
+    
+    struct Mahasiswa mhs;
+    
+    printf("Nama: ");
+    fgets(mhs.nama, sizeof(mhs.nama), stdin);
+    mhs.nama[strcspn(mhs.nama, "\n")] = 0;
+    
+    printf("NIM: ");
+    fgets(mhs.nim, sizeof(mhs.nim), stdin);
+    mhs.nim[strcspn(mhs.nim, "\n")] = 0;
+    
+    printf("IPK: ");
+    scanf("%f", &mhs.ipk);
+    getchar();
+    
+    fprintf(file, "%s|%s|%.2f\n", mhs.nama, mhs.nim, mhs.ipk);
+    fclose(file);
+    
+    printf("Data mahasiswa tersimpan!\n");
+}
+
+// Fungsi untuk menampilkan semua mahasiswa
+void tampilkanMahasiswa() {
+    FILE *file = fopen("mahasiswa.txt", "r");
+    if (file == NULL) {
+        printf("Belum ada data!\n");
+        return;
+    }
+    
+    struct Mahasiswa mhs;
+    
+    printf("\n=== DAFTAR MAHASISWA ===\n");
+    while (fscanf(file, "%[^|]|%[^|]|%f\n", 
+                  mhs.nama, mhs.nim, &mhs.ipk) == 3) {
+        printf("Nama: %s\n", mhs.nama);
+        printf("NIM : %s\n", mhs.nim);
+        printf("IPK : %.2f\n\n", mhs.ipk);
+    }
+    
+    fclose(file);
+}
+
+int main() {
+    int pilihan;
+    
+    do {
+        printf("\n=== SISTEM DATA MAHASISWA ===\n");
+        printf("1. Tambah Mahasiswa\n");
+        printf("2. Lihat Semua Mahasiswa\n");
+        printf("3. Keluar\n");
+        printf("Pilihan: ");
+        scanf("%d", &pilihan);
+        getchar();
+        
+        switch (pilihan) {
+            case 1:
+                simpanMahasiswa();
+                break;
+            case 2:
+                tampilkanMahasiswa();
+                break;
+            case 3:
+                printf("Terima kasih!\n");
+                break;
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
+    } while (pilihan != 3);
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.7 Mencari Data dalam File</h3>
+
+        <h4>Contoh: Cari Mahasiswa Berdasarkan NIM</h4>
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+#include <string.h>
+
+struct Mahasiswa {
+    char nama[50];
+    char nim[20];
+    float ipk;
+};
+
+void cariMahasiswa() {
+    FILE *file = fopen("mahasiswa.txt", "r");
+    if (file == NULL) {
+        printf("File tidak ditemukan!\n");
+        return;
+    }
+    
+    char nimCari[20];
+    printf("Masukkan NIM yang dicari: ");
+    scanf("%s", nimCari);
+    
+    struct Mahasiswa mhs;
+    int ditemukan = 0;
+    
+    while (fscanf(file, "%[^|]|%[^|]|%f\n", 
+                  mhs.nama, mhs.nim, &mhs.ipk) == 3) {
+        if (strcmp(mhs.nim, nimCari) == 0) {
+            printf("\nMahasiswa ditemukan!\n");
+            printf("Nama: %s\n", mhs.nama);
+            printf("NIM : %s\n", mhs.nim);
+            printf("IPK : %.2f\n", mhs.ipk);
+            ditemukan = 1;
+            break;
+        }
+    }
+    
+    if (!ditemukan) {
+        printf("Mahasiswa dengan NIM %s tidak ditemukan.\n", nimCari);
+    }
+    
+    fclose(file);
+}
+
+int main() {
+    cariMahasiswa();
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>8.8 Menghitung Jumlah Baris dalam File</h3>
+
+        <div class="code-block">
+<pre><code>#include <stdio.h>
+
+int hitungBaris(char *namaFile) {
+    FILE *file = fopen(namaFile, "r");
+    if (file == NULL) {
+        return -1;
+    }
+    
+    int jumlah = 0;
+    char karakter;
+    
+    while ((karakter = fgetc(file)) != EOF) {
+        if (karakter == '\n') {
+            jumlah++;
+        }
+    }
+    
+    fclose(file);
+    return jumlah;
+}
+
+int main() {
+    char namaFile[50];
+    
+    printf("Nama file: ");
+    scanf("%s", namaFile);
+    
+    int baris = hitungBaris(namaFile);
+    
+    if (baris == -1) {
+        printf("File tidak ditemukan!\n");
+    } else {
+        printf("Jumlah baris: %d\n", baris);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <p><strong>Best Practices File Processing:</strong></p>
+        <ul>
+            <li><strong>Selalu cek NULL:</strong> Pastikan file berhasil dibuka sebelum digunakan</li>
+            <li><strong>Tutup file:</strong> Gunakan <code>fclose()</code> setelah selesai</li>
+            <li><strong>Gunakan mode yang tepat:</strong> <code>"r"</code> untuk baca, <code>"w"</code> untuk tulis baru, <code>"a"</code> untuk tambah</li>
+            <li><strong>Format konsisten:</strong> Gunakan delimiter yang sama (seperti <code>|</code>) saat menyimpan data terstruktur</li>
+            <li><strong>Handle error:</strong> Berikan pesan error yang jelas kepada user</li>
+        </ul>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Latihan Praktek</h4>
+        <ul>
+            <li><strong>SOAL 2:</strong> Sistem Inventori Produk
+                <ul>
+                    <li>Buat struct <code>Produk</code> dengan: <code>kode</code>, <code>nama</code>, <code>harga</code>, <code>stok</code></li>
+                    <li>Buat menu:
+                        <ol>
+                            <li>Tambah produk (simpan ke <code>produk.txt</code>)</li>
+                            <li>Lihat semua produk</li>
+                            <li>Cari produk berdasarkan kode</li>
+                            <li>Hitung total nilai inventori (harga × stok semua produk)</li>
+                            <li>Keluar</li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="exercise-box">
+        <h4>Project Mini</h4>
+        <ul>
+            <li><strong>SOAL 3:</strong> Sistem Perpustakaan Sederhana
+                <ul>
+                    <li>Buat struct <code>Buku</code>: <code>judul</code>, <code>pengarang</code>, <code>isbn</code>, <code>status</code> (tersedia/dipinjam)</li>
+                    <li>Fitur:
+                        <ol>
+                            <li>Tambah buku baru</li>
+                            <li>Tampilkan semua buku</li>
+                            <li>Pinjam buku (ubah status)</li>
+                            <li>Kembalikan buku</li>
+                            <li>Cari buku berdasarkan judul</li>
+                            <li>Lihat statistik (total buku, dipinjam, tersedia)</li>
+                        </ol>
+                    </li>
+                    <li>Gunakan file <code>perpustakaan.txt</code> untuk menyimpan data</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <p><strong>Tips Debugging File:</strong></p>
+        <ul>
+            <li>Buka file hasil dengan text editor untuk memastikan format benar</li>
+            <li>Gunakan <code>printf()</code> untuk debug saat baca/tulis</li>
+            <li>Cek apakah file ada di direktori yang benar</li>
+            <li>Pastikan permission file memungkinkan baca/tulis</li>
+        </ul>
+    </div>
+
+    <div class="highlight" style="margin-top: 30px;">
+        <p><strong>Selamat!</strong> Anda telah mempelajari File Processing dalam C. Dengan skill ini, Anda bisa membuat program yang menyimpan data secara permanen dan membuat sistem sederhana seperti database berbasis file.</p>
+    </div>
+</div>
