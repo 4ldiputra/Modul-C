@@ -1,0 +1,454 @@
+<div class="content-section" id="sorting">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">🔢 Algoritma Sorting (Pengurutan)</h2>
+
+    <div class="highlight">
+        <p><strong>Sorting</strong> adalah proses menyusun data dalam urutan tertentu (ascending/naik atau descending/turun). Algoritma sorting sangat penting dalam pemrograman untuk mengoptimalkan pencarian dan analisis data.</p>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- BUBBLE SORT -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>🫧 1. Bubble Sort</h3>
+        
+        <div class="highlight">
+            <p><strong>Konsep:</strong> Bubble Sort membandingkan dua elemen berdekatan dan menukarnya jika urutannya salah. Proses ini diulang hingga tidak ada lagi pertukaran yang dilakukan.</p>
+            <p><strong>Analogi:</strong> Seperti gelembung air yang naik ke permukaan - elemen terbesar akan "mengapung" ke posisi terakhir.</p>
+        </div>
+
+        <h4>📋 Cara Kerja Bubble Sort</h4>
+        <div class="note-box">
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Bandingkan elemen pertama dengan elemen kedua</li>
+                <li>Jika elemen pertama lebih besar, tukar posisinya</li>
+                <li>Lanjutkan ke pasangan berikutnya</li>
+                <li>Ulangi proses untuk semua elemen</li>
+                <li>Setelah satu putaran, elemen terbesar akan berada di posisi terakhir</li>
+                <li>Ulangi untuk elemen-elemen sebelumnya</li>
+            </ol>
+        </div>
+
+        <h4>🎬 Visualisasi Proses: Bubble Sort</h4>
+        <div class="code-block" style="background: #f8f9fa; padding: 20px; border-left: 4px solid #0066cc;">
+<pre style="color: #333; line-height: 1.8;">
+<strong>Data Awal: [5, 2, 8, 1, 9]</strong>
+
+<span style="color: #0066cc;"><strong>PUTARAN 1:</strong></span>
+Pass 1.1: [<span style="background: #ffe6e6;">5, 2</span>, 8, 1, 9] → [<span style="background: #e6ffe6;">2, 5</span>, 8, 1, 9]  ✓ Tukar (5 > 2)
+Pass 1.2: [2, <span style="background: #ffe6e6;">5, 8</span>, 1, 9] → [2, <span style="background: #e6ffe6;">5, 8</span>, 1, 9]  ✗ Tidak tukar (5 < 8)
+Pass 1.3: [2, 5, <span style="background: #ffe6e6;">8, 1</span>, 9] → [2, 5, <span style="background: #e6ffe6;">1, 8</span>, 9]  ✓ Tukar (8 > 1)
+Pass 1.4: [2, 5, 1, <span style="background: #ffe6e6;">8, 9</span>] → [2, 5, 1, <span style="background: #e6ffe6;">8, 9</span>]  ✗ Tidak tukar (8 < 9)
+<strong>Hasil Putaran 1: [2, 5, 1, 8, <span style="background: #90EE90;">9</span>]</strong> ← 9 sudah di posisi akhir
+
+<span style="color: #0066cc;"><strong>PUTARAN 2:</strong></span>
+Pass 2.1: [<span style="background: #ffe6e6;">2, 5</span>, 1, 8, 9] → [<span style="background: #e6ffe6;">2, 5</span>, 1, 8, 9]  ✗ Tidak tukar (2 < 5)
+Pass 2.2: [2, <span style="background: #ffe6e6;">5, 1</span>, 8, 9] → [2, <span style="background: #e6ffe6;">1, 5</span>, 8, 9]  ✓ Tukar (5 > 1)
+Pass 2.3: [2, 1, <span style="background: #ffe6e6;">5, 8</span>, 9] → [2, 1, <span style="background: #e6ffe6;">5, 8</span>, 9]  ✗ Tidak tukar (5 < 8)
+<strong>Hasil Putaran 2: [2, 1, 5, <span style="background: #90EE90;">8, 9</span>]</strong> ← 8 sudah di posisi
+
+<span style="color: #0066cc;"><strong>PUTARAN 3:</strong></span>
+Pass 3.1: [<span style="background: #ffe6e6;">2, 1</span>, 5, 8, 9] → [<span style="background: #e6ffe6;">1, 2</span>, 5, 8, 9]  ✓ Tukar (2 > 1)
+Pass 3.2: [1, <span style="background: #ffe6e6;">2, 5</span>, 8, 9] → [1, <span style="background: #e6ffe6;">2, 5</span>, 8, 9]  ✗ Tidak tukar (2 < 5)
+<strong>Hasil Putaran 3: [1, 2, <span style="background: #90EE90;">5, 8, 9</span>]</strong> ← 5 sudah di posisi
+
+<span style="color: #0066cc;"><strong>PUTARAN 4:</strong></span>
+Pass 4.1: [<span style="background: #ffe6e6;">1, 2</span>, 5, 8, 9] → [<span style="background: #e6ffe6;">1, 2</span>, 5, 8, 9]  ✗ Tidak tukar (1 < 2)
+<strong>Hasil Putaran 4: [<span style="background: #90EE90;">1, 2, 5, 8, 9</span>]</strong> ← SELESAI! ✓
+
+<span style="color: #28a745;"><strong>✓ DATA TERURUT: [1, 2, 5, 8, 9]</strong></span>
+</pre>
+        </div>
+
+        <h4>💻 Implementasi Bubble Sort dalam C</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    int tukar; // flag untuk optimasi
+    
+    // Loop untuk setiap putaran
+    for (i = 0; i &lt; n - 1; i++) {
+        tukar = 0; // reset flag
+        
+        // Loop untuk membandingkan elemen berdekatan
+        for (j = 0; j &lt; n - i - 1; j++) {
+            // Jika elemen kiri lebih besar, tukar
+            if (arr[j] &gt; arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                tukar = 1;
+            }
+        }
+        
+        // Jika tidak ada pertukaran, array sudah terurut
+        if (tukar == 0) {
+            break;
+        }
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    printArray(arr, n);
+    
+    bubbleSort(arr, n);
+    
+    printf("Array setelah sorting: ");
+    printArray(arr, n);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Kompleksitas Bubble Sort:</strong></p>
+            <ul>
+                <li><strong>Best Case:</strong> O(n) - ketika data sudah terurut</li>
+                <li><strong>Average Case:</strong> O(n²)</li>
+                <li><strong>Worst Case:</strong> O(n²) - ketika data terurut terbalik</li>
+                <li><strong>Space Complexity:</strong> O(1) - tidak butuh memori tambahan</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- SELECTION SORT -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>🎯 2. Selection Sort</h3>
+        
+        <div class="highlight">
+            <p><strong>Konsep:</strong> Selection Sort mencari elemen terkecil dan menempatkannya di posisi pertama, lalu mencari elemen terkecil berikutnya untuk posisi kedua, dan seterusnya.</p>
+            <p><strong>Analogi:</strong> Seperti memilih pemain terpendek untuk baris paling depan, lalu yang lebih tinggi di belakangnya.</p>
+        </div>
+
+        <h4>📋 Cara Kerja Selection Sort</h4>
+        <div class="note-box">
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Cari elemen terkecil dalam seluruh array</li>
+                <li>Tukar dengan elemen di posisi pertama</li>
+                <li>Cari elemen terkecil dalam sisa array (kecuali posisi 1)</li>
+                <li>Tukar dengan elemen di posisi kedua</li>
+                <li>Ulangi hingga semua elemen terurut</li>
+            </ol>
+        </div>
+
+        <h4>🎬 Visualisasi Proses: Selection Sort</h4>
+        <div class="code-block" style="background: #f8f9fa; padding: 20px; border-left: 4px solid #28a745;">
+<pre style="color: #333; line-height: 1.8;">
+<strong>Data Awal: [5, 2, 8, 1, 9]</strong>
+
+<span style="color: #28a745;"><strong>PUTARAN 1:</strong></span> Cari minimum dari index 0-4
+Bandingkan: 5 vs 2 vs 8 vs 1 vs 9
+Minimum = <span style="background: #ffeb99;">1</span> (di index 3)
+[<span style="background: #ffe6e6;">5</span>, 2, 8, <span style="background: #ffe6e6;">1</span>, 9] → [<span style="background: #90EE90;">1</span>, 2, 8, 5, 9]
+<strong>Hasil: [<span style="background: #90EE90;">1</span>, 2, 8, 5, 9]</strong> ← 1 sudah di posisi akhir
+
+<span style="color: #28a745;"><strong>PUTARAN 2:</strong></span> Cari minimum dari index 1-4
+Bandingkan: 2 vs 8 vs 5 vs 9
+Minimum = <span style="background: #ffeb99;">2</span> (sudah di index 1)
+[1, <span style="background: #ffe6e6;">2</span>, 8, 5, 9] → [1, <span style="background: #90EE90;">2</span>, 8, 5, 9]
+<strong>Hasil: [<span style="background: #90EE90;">1, 2</span>, 8, 5, 9]</strong> ← Tidak ada pertukaran
+
+<span style="color: #28a745;"><strong>PUTARAN 3:</strong></span> Cari minimum dari index 2-4
+Bandingkan: 8 vs 5 vs 9
+Minimum = <span style="background: #ffeb99;">5</span> (di index 3)
+[1, 2, <span style="background: #ffe6e6;">8</span>, <span style="background: #ffe6e6;">5</span>, 9] → [1, 2, <span style="background: #90EE90;">5</span>, 8, 9]
+<strong>Hasil: [<span style="background: #90EE90;">1, 2, 5</span>, 8, 9]</strong>
+
+<span style="color: #28a745;"><strong>PUTARAN 4:</strong></span> Cari minimum dari index 3-4
+Bandingkan: 8 vs 9
+Minimum = <span style="background: #ffeb99;">8</span> (sudah di index 3)
+[1, 2, 5, <span style="background: #ffe6e6;">8</span>, 9] → [1, 2, 5, <span style="background: #90EE90;">8</span>, 9]
+<strong>Hasil: [<span style="background: #90EE90;">1, 2, 5, 8</span>, 9]</strong>
+
+<span style="color: #28a745;"><strong>SELESAI!</strong></span> Elemen terakhir otomatis sudah terurut
+<strong>Hasil Final: [<span style="background: #90EE90;">1, 2, 5, 8, 9</span>]</strong> ✓
+</pre>
+        </div>
+
+        <h4>💻 Implementasi Selection Sort dalam C</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+void selectionSort(int arr[], int n) {
+    int i, j, minIndex, temp;
+    
+    // Loop untuk setiap posisi
+    for (i = 0; i &lt; n - 1; i++) {
+        // Anggap elemen pertama adalah minimum
+        minIndex = i;
+        
+        // Cari elemen terkecil di sisa array
+        for (j = i + 1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        
+        // Tukar elemen minimum dengan elemen di posisi i
+        if (minIndex != i) {
+            temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    printArray(arr, n);
+    
+    selectionSort(arr, n);
+    
+    printf("Array setelah sorting: ");
+    printArray(arr, n);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Kompleksitas Selection Sort:</strong></p>
+            <ul>
+                <li><strong>Best Case:</strong> O(n²) - selalu melakukan perbandingan penuh</li>
+                <li><strong>Average Case:</strong> O(n²)</li>
+                <li><strong>Worst Case:</strong> O(n²)</li>
+                <li><strong>Space Complexity:</strong> O(1)</li>
+                <li><strong>Keuntungan:</strong> Jumlah pertukaran minimal (maksimal n-1 kali)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- INSERTION SORT -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>🃏 3. Insertion Sort</h3>
+        
+        <div class="highlight">
+            <p><strong>Konsep:</strong> Insertion Sort membangun array terurut satu elemen pada satu waktu dengan menyisipkan setiap elemen baru ke posisi yang tepat.</p>
+            <p><strong>Analogi:</strong> Seperti menyusun kartu di tangan - ambil satu kartu, lalu sisipkan ke posisi yang benar di antara kartu yang sudah tersusun.</p>
+        </div>
+
+        <h4>📋 Cara Kerja Insertion Sort</h4>
+        <div class="note-box">
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Mulai dari elemen kedua (anggap elemen pertama sudah terurut)</li>
+                <li>Simpan elemen saat ini sebagai "key"</li>
+                <li>Bandingkan key dengan elemen-elemen sebelumnya</li>
+                <li>Geser elemen yang lebih besar dari key ke kanan</li>
+                <li>Sisipkan key di posisi yang tepat</li>
+                <li>Ulangi untuk semua elemen</li>
+            </ol>
+        </div>
+
+        <h4>🎬 Visualisasi Proses: Insertion Sort</h4>
+        <div class="code-block" style="background: #f8f9fa; padding: 20px; border-left: 4px solid #dc3545;">
+<pre style="color: #333; line-height: 1.8;">
+<strong>Data Awal: [5, 2, 8, 1, 9]</strong>
+
+<span style="color: #dc3545;"><strong>PUTARAN 1:</strong></span> Sisipkan elemen ke-2 (index 1)
+Key = <span style="background: #ffeb99;">2</span>
+[<span style="background: #90EE90;">5</span> | <span style="background: #ffeb99;">2</span>, 8, 1, 9]  ← Bagian kiri sudah terurut
+Bandingkan 2 dengan 5: 2 &lt; 5, geser 5 ke kanan
+[_, 5, 8, 1, 9] → sisipkan 2 di posisi 0
+<strong>Hasil: [<span style="background: #90EE90;">2, 5</span> | 8, 1, 9]</strong>
+
+<span style="color: #dc3545;"><strong>PUTARAN 2:</strong></span> Sisipkan elemen ke-3 (index 2)
+Key = <span style="background: #ffeb99;">8</span>
+[<span style="background: #90EE90;">2, 5</span> | <span style="background: #ffeb99;">8</span>, 1, 9]
+Bandingkan 8 dengan 5: 8 &gt; 5, tidak geser
+8 sudah di posisi yang benar
+<strong>Hasil: [<span style="background: #90EE90;">2, 5, 8</span> | 1, 9]</strong>
+
+<span style="color: #dc3545;"><strong>PUTARAN 3:</strong></span> Sisipkan elemen ke-4 (index 3)
+Key = <span style="background: #ffeb99;">1</span>
+[<span style="background: #90EE90;">2, 5, 8</span> | <span style="background: #ffeb99;">1</span>, 9]
+Bandingkan 1 dengan 8: 1 &lt; 8, geser 8
+[2, 5, _, 8, 9]
+Bandingkan 1 dengan 5: 1 &lt; 5, geser 5
+[2, _, 5, 8, 9]
+Bandingkan 1 dengan 2: 1 &lt; 2, geser 2
+[_, 2, 5, 8, 9] → sisipkan 1 di posisi 0
+<strong>Hasil: [<span style="background: #90EE90;">1, 2, 5, 8</span> | 9]</strong>
+
+<span style="color: #dc3545;"><strong>PUTARAN 4:</strong></span> Sisipkan elemen ke-5 (index 4)
+Key = <span style="background: #ffeb99;">9</span>
+[<span style="background: #90EE90;">1, 2, 5, 8</span> | <span style="background: #ffeb99;">9</span>]
+Bandingkan 9 dengan 8: 9 &gt; 8, tidak geser
+9 sudah di posisi yang benar
+<strong>Hasil: [<span style="background: #90EE90;">1, 2, 5, 8, 9</span>]</strong> ✓ SELESAI!
+</pre>
+        </div>
+
+        <h4>💻 Implementasi Insertion Sort dalam C</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+void insertionSort(int arr[], int n) {
+    int i, j, key;
+    
+    // Mulai dari elemen kedua
+    for (i = 1; i &lt; n; i++) {
+        key = arr[i];  // Simpan elemen yang akan disisipkan
+        j = i - 1;
+        
+        // Geser elemen yang lebih besar dari key ke kanan
+        while (j &gt;= 0 && arr[j] &gt; key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        
+        // Sisipkan key di posisi yang tepat
+        arr[j + 1] = key;
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Array sebelum sorting: ");
+    printArray(arr, n);
+    
+    insertionSort(arr, n);
+    
+    printf("Array setelah sorting: ");
+    printArray(arr, n);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Kompleksitas Insertion Sort:</strong></p>
+            <ul>
+                <li><strong>Best Case:</strong> O(n) - ketika data sudah terurut (hanya perbandingan)</li>
+                <li><strong>Average Case:</strong> O(n²)</li>
+                <li><strong>Worst Case:</strong> O(n²) - ketika data terurut terbalik</li>
+                <li><strong>Space Complexity:</strong> O(1)</li>
+                <li><strong>Keuntungan:</strong> Sangat efisien untuk data yang hampir terurut</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- PERBANDINGAN -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>📊 Perbandingan Ketiga Algoritma</h3>
+
+        <div class="code-block" style="background: #f8f9fa;">
+<pre style="color: #333;">
+<strong>┌─────────────────┬──────────────┬──────────────────┬───────────────────┐</strong>
+<strong>│   ALGORITMA     │ KOMPLEKSITAS │  CARA KERJA      │   COCOK UNTUK     │</strong>
+<strong>├─────────────────┼──────────────┼──────────────────┼───────────────────┤</strong>
+│ Bubble Sort     │    O(n²)     │ Tukar berdekatan │ Data kecil        │
+│                 │              │ Elemen besar     │ Pembelajaran      │
+│                 │              │ "mengapung"      │                   │
+<strong>├─────────────────┼──────────────┼──────────────────┼───────────────────┤</strong>
+│ Selection Sort  │    O(n²)     │ Pilih minimum    │ Minimasi swap     │
+│                 │              │ Tukar ke depan   │ Data kecil        │
+│                 │              │ Pertukaran sedikit│                  │
+<strong>├─────────────────┼──────────────┼──────────────────┼───────────────────┤</strong>
+│ Insertion Sort  │ O(n) - O(n²) │ Sisipkan elemen  │ Data hampir urut  │
+│                 │              │ ke posisi tepat  │ Data online       │
+│                 │              │ Seperti kartu    │ Real-time input   │
+<strong>└─────────────────┴──────────────┴──────────────────┴───────────────────┘</strong>
+</pre>
+        </div>
+
+        <h4>🏆 Kapan Menggunakan Algoritma Apa?</h4>
+        <div class="highlight">
+            <ul>
+                <li><strong>Bubble Sort:</strong> Untuk pembelajaran dan data sangat kecil (&lt;10 elemen)</li>
+                <li><strong>Selection Sort:</strong> Ketika memori swap mahal (embedded systems)</li>
+                <li><strong>Insertion Sort:</strong> Untuk data yang hampir terurut atau input real-time</li>
+                <li><strong>Untuk data besar:</strong> Gunakan Quick Sort, Merge Sort, atau Heap Sort</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- LATIHAN -->
+    <!-- ============================================= -->
+    <div class="exercise-box">
+        <h4>💪 Latihan Praktek</h4>
+        
+        <p><strong>SOAL 1: Implementasi Tiga Algoritma</strong></p>
+        <ul>
+            <li>Buat program dengan menu untuk memilih algoritma sorting</li>
+            <li>Input: array integer dari user (5-10 elemen)</li>
+            <li>Menu:
+                <ol>
+                    <li>Bubble Sort</li>
+                    <li>Selection Sort</li>
+                    <li>Insertion Sort</li>
+                    <li>Keluar</li>
+                </ol>
+            </li>
+            <li>Tampilkan proses sorting step-by-step (opsional)</li>
+            <li>Tampilkan hasil akhir</li>
+        </ul>
+
+        <p><strong>SOAL 2: Sorting Data Mahasiswa</strong></p>
+        <ul>
+            <li>Buat struct Mahasiswa dengan: nama, nim, nilai</li>
+            <li>Input data 5 mahasiswa</li>
+            <li>Urutkan berdasarkan nilai (gunakan salah satu algoritma)</li>
+            <li>Tampilkan ranking mahasiswa</li>
+        </ul>
+
+        <p><strong>SOAL 3: Descending Sort</strong></p>
+        <ul>
+            <li>Modifikasi salah satu algoritma untuk mengurutkan dari besar ke kecil</li>
+            <li>Input: array integer</li>
+            <li>Output: array terurut descending</li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <p><strong>💡 Tips Memahami Sorting:</strong></p>
+        <ul>
+            <li>Coba tulis proses di kertas dengan data contoh kecil (3-5 angka)</li>
+            <li>Gambar panah untuk visualisasi perbandingan dan pertukaran</li>
+            <li>Hitung berapa kali perbandingan dan pertukaran dilakukan</li>
+            <li>Debug dengan menampilkan array setelah setiap iterasi</li>
+            <li>Pahami kapan loop berhenti di setiap algoritma</li>
+        </ul>
+    </div>
+</div>
