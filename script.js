@@ -14,6 +14,7 @@ const sectionFiles = {
     'memory': 'sections/memory.html',
     'files': 'sections/files.html',
     'sorting': 'sections/sorting.html',
+    'searching': 'sections/searching.html',
     'advanced': 'sections/advanced.html'
 };
 

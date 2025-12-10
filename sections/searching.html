@@ -1,0 +1,572 @@
+<div class="content-section" id="searching">
+    <button class="back-btn" onclick="showNavigation()">← Kembali ke Menu</button>
+    <h2 class="section-title">🔍 Algoritma Searching (Pencarian)</h2>
+
+    <div class="highlight">
+        <p><strong>Searching</strong> adalah proses mencari keberadaan suatu nilai (key) dalam kumpulan data. Algoritma searching sangat penting untuk menemukan data dengan efisien dalam aplikasi nyata seperti database, search engine, dan sistem informasi.</p>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- LINEAR SEARCH -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>🎯 1. Linear Search (Sequential Search)</h3>
+        
+        <div class="highlight">
+            <p><strong>Konsep:</strong> Linear Search mencari data dengan memeriksa setiap elemen satu per satu dari awal hingga akhir array sampai data ditemukan atau array habis.</p>
+            <p><strong>Analogi:</strong> Seperti mencari kunci di dalam tas dengan mengecek satu per satu barang di dalamnya sampai ketemu.</p>
+        </div>
+
+        <h4>📋 Cara Kerja Linear Search</h4>
+        <div class="note-box">
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Mulai dari elemen pertama (index 0)</li>
+                <li>Bandingkan elemen saat ini dengan nilai yang dicari</li>
+                <li>Jika cocok, kembalikan index elemen tersebut</li>
+                <li>Jika tidak cocok, lanjut ke elemen berikutnya</li>
+                <li>Ulangi hingga elemen ditemukan atau array habis</li>
+                <li>Jika sampai akhir tidak ketemu, kembalikan -1 (tidak ditemukan)</li>
+            </ol>
+        </div>
+
+        <h4>🎬 Visualisasi Proses: Linear Search</h4>
+        <div class="code-block" style="background: #f8f9fa; padding: 20px; border-left: 4px solid #0066cc;">
+<pre style="color: #333; line-height: 1.8;">
+<strong>Data Array: [5, 2, 8, 1, 9, 3, 7]</strong>
+<strong>Mencari: 9</strong>
+
+<span style="color: #0066cc;"><strong>PENCARIAN DIMULAI:</strong></span>
+
+Index 0: [<span style="background: #ffeb99;">5</span>, 2, 8, 1, 9, 3, 7]
+         Bandingkan 5 == 9? ✗ Tidak cocok, lanjut
+
+Index 1: [5, <span style="background: #ffeb99;">2</span>, 8, 1, 9, 3, 7]
+         Bandingkan 2 == 9? ✗ Tidak cocok, lanjut
+
+Index 2: [5, 2, <span style="background: #ffeb99;">8</span>, 1, 9, 3, 7]
+         Bandingkan 8 == 9? ✗ Tidak cocok, lanjut
+
+Index 3: [5, 2, 8, <span style="background: #ffeb99;">1</span>, 9, 3, 7]
+         Bandingkan 1 == 9? ✗ Tidak cocok, lanjut
+
+Index 4: [5, 2, 8, 1, <span style="background: #90EE90;">9</span>, 3, 7]
+         Bandingkan 9 == 9? ✓ <strong>DITEMUKAN!</strong>
+
+<span style="color: #28a745;"><strong>✓ Data ditemukan di index 4</strong></span>
+<strong>Total perbandingan: 5 kali</strong>
+
+<span style="color: #dc3545;"><strong>CONTOH JIKA TIDAK DITEMUKAN:</strong></span>
+Mencari: 15 (tidak ada dalam array)
+Index 0: 5 ≠ 15 ✗
+Index 1: 2 ≠ 15 ✗
+Index 2: 8 ≠ 15 ✗
+Index 3: 1 ≠ 15 ✗
+Index 4: 9 ≠ 15 ✗
+Index 5: 3 ≠ 15 ✗
+Index 6: 7 ≠ 15 ✗
+<span style="color: #dc3545;"><strong>✗ Data tidak ditemukan (return -1)</strong></span>
+</pre>
+        </div>
+
+        <h4>💻 Implementasi Linear Search dalam C</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int linearSearch(int arr[], int n, int key) {
+    // Loop untuk memeriksa setiap elemen
+    for (int i = 0; i &lt; n; i++) {
+        // Jika elemen ditemukan, kembalikan indexnya
+        if (arr[i] == key) {
+            return i;
+        }
+    }
+    // Jika tidak ditemukan, kembalikan -1
+    return -1;
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {5, 2, 8, 1, 9, 3, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int key;
+    
+    printf("Data array: ");
+    printArray(arr, n);
+    
+    printf("Masukkan angka yang dicari: ");
+    scanf("%d", &key);
+    
+    int result = linearSearch(arr, n, key);
+    
+    if (result != -1) {
+        printf("Data %d ditemukan di index %d\n", key, result);
+    } else {
+        printf("Data %d tidak ditemukan dalam array\n", key);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Kompleksitas Linear Search:</strong></p>
+            <ul>
+                <li><strong>Best Case:</strong> O(1) - data ada di posisi pertama</li>
+                <li><strong>Average Case:</strong> O(n) - data di tengah-tengah</li>
+                <li><strong>Worst Case:</strong> O(n) - data di posisi terakhir atau tidak ada</li>
+                <li><strong>Space Complexity:</strong> O(1) - tidak butuh memori tambahan</li>
+            </ul>
+        </div>
+
+        <h4>✅ Kelebihan Linear Search</h4>
+        <div class="highlight">
+            <ul>
+                <li>Sederhana dan mudah diimplementasikan</li>
+                <li>Tidak memerlukan data yang terurut</li>
+                <li>Cocok untuk array kecil</li>
+                <li>Efisien jika data dicari ada di awal array</li>
+            </ul>
+        </div>
+
+        <h4>❌ Kekurangan Linear Search</h4>
+        <div class="warning">
+            <ul>
+                <li>Lambat untuk array besar</li>
+                <li>Harus memeriksa semua elemen jika data tidak ditemukan</li>
+                <li>Tidak efisien dibanding Binary Search untuk data terurut</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- BINARY SEARCH -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>⚡ 2. Binary Search</h3>
+        
+        <div class="highlight">
+            <p><strong>Konsep:</strong> Binary Search mencari data dengan membagi array menjadi dua bagian secara berulang, membandingkan nilai tengah dengan nilai yang dicari. <strong style="color: #dc3545;">SYARAT: Array harus sudah terurut!</strong></p>
+            <p><strong>Analogi:</strong> Seperti mencari kata dalam kamus - buka halaman tengah, jika kata yang dicari lebih kecil, cari di setengah kiri, jika lebih besar, cari di setengah kanan.</p>
+        </div>
+
+        <h4>📋 Cara Kerja Binary Search</h4>
+        <div class="note-box">
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Tentukan posisi awal (left) dan akhir (right) array</li>
+                <li>Hitung posisi tengah: mid = (left + right) / 2</li>
+                <li>Bandingkan elemen tengah dengan nilai yang dicari:
+                    <ul>
+                        <li>Jika sama, data ditemukan! Return mid</li>
+                        <li>Jika nilai dicari < elemen tengah, cari di setengah kiri (right = mid - 1)</li>
+                        <li>Jika nilai dicari > elemen tengah, cari di setengah kanan (left = mid + 1)</li>
+                    </ul>
+                </li>
+                <li>Ulangi hingga data ditemukan atau left > right</li>
+            </ol>
+        </div>
+
+        <h4>🎬 Visualisasi Proses: Binary Search</h4>
+        <div class="code-block" style="background: #f8f9fa; padding: 20px; border-left: 4px solid #28a745;">
+<pre style="color: #333; line-height: 1.8;">
+<strong>Data Array (HARUS TERURUT): [1, 2, 3, 5, 7, 8, 9]</strong>
+<strong>Mencari: 7</strong>
+
+<span style="color: #28a745;"><strong>ITERASI 1:</strong></span>
+Left = 0, Right = 6
+Mid = (0 + 6) / 2 = 3
+
+Array: [1, 2, 3, <span style="background: #ffeb99;">5</span>, 7, 8, 9]
+        └──────┘  ↑  └──────┘
+         Kiri    Mid   Kanan
+
+Bandingkan: 7 vs 5
+7 > 5 → Cari di setengah KANAN
+Left = Mid + 1 = 4
+
+<span style="color: #28a745;"><strong>ITERASI 2:</strong></span>
+Left = 4, Right = 6
+Mid = (4 + 6) / 2 = 5
+
+Array: [1, 2, 3, 5, 7, <span style="background: #ffeb99;">8</span>, 9]
+                    └─┘ ↑  └┘
+                   Kiri Mid Kanan
+
+Bandingkan: 7 vs 8
+7 < 8 → Cari di setengah KIRI
+Right = Mid - 1 = 4
+
+<span style="color: #28a745;"><strong>ITERASI 3:</strong></span>
+Left = 4, Right = 4
+Mid = (4 + 4) / 2 = 4
+
+Array: [1, 2, 3, 5, <span style="background: #90EE90;">7</span>, 8, 9]
+                    ↑
+                   Mid
+
+Bandingkan: 7 vs 7
+7 == 7 → <strong>DITEMUKAN!</strong>
+
+<span style="color: #28a745;"><strong>✓ Data ditemukan di index 4</strong></span>
+<strong>Total perbandingan: 3 kali</strong>
+(Bandingkan dengan Linear Search yang butuh 5 kali!)
+
+<span style="color: #dc3545;"><strong>CONTOH JIKA TIDAK DITEMUKAN:</strong></span>
+Mencari: 6 (tidak ada dalam array)
+
+ITERASI 1: Mid = 3, arr[3] = 5, 6 > 5 → Right
+ITERASI 2: Mid = 5, arr[5] = 8, 6 < 8 → Left  
+ITERASI 3: Mid = 4, arr[4] = 7, 6 < 7 → Left
+Left = 4, Right = 3 → Left > Right
+<span style="color: #dc3545;"><strong>✗ Data tidak ditemukan (return -1)</strong></span>
+</pre>
+        </div>
+
+        <h4>💻 Implementasi Binary Search dalam C (Iteratif)</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int binarySearch(int arr[], int n, int key) {
+    int left = 0;
+    int right = n - 1;
+    
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2; // Hindari overflow
+        
+        // Jika elemen tengah adalah yang dicari
+        if (arr[mid] == key) {
+            return mid;
+        }
+        
+        // Jika key lebih kecil, cari di setengah kiri
+        if (arr[mid] > key) {
+            right = mid - 1;
+        }
+        // Jika key lebih besar, cari di setengah kanan
+        else {
+            left = mid + 1;
+        }
+    }
+    
+    // Tidak ditemukan
+    return -1;
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 5, 7, 8, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int key;
+    
+    printf("Data array (terurut): ");
+    printArray(arr, n);
+    
+    printf("Masukkan angka yang dicari: ");
+    scanf("%d", &key);
+    
+    int result = binarySearch(arr, n, key);
+    
+    if (result != -1) {
+        printf("Data %d ditemukan di index %d\n", key, result);
+    } else {
+        printf("Data %d tidak ditemukan dalam array\n", key);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <h4>🔄 Implementasi Binary Search (Rekursif)</h4>
+        <div class="code-block">
+<pre><code>#include &lt;stdio.h&gt;
+
+int binarySearchRecursive(int arr[], int left, int right, int key) {
+    // Base case: element tidak ditemukan
+    if (left > right) {
+        return -1;
+    }
+    
+    int mid = left + (right - left) / 2;
+    
+    // Jika elemen tengah adalah yang dicari
+    if (arr[mid] == key) {
+        return mid;
+    }
+    
+    // Jika key lebih kecil, cari di setengah kiri
+    if (arr[mid] > key) {
+        return binarySearchRecursive(arr, left, mid - 1, key);
+    }
+    
+    // Jika key lebih besar, cari di setengah kanan
+    return binarySearchRecursive(arr, mid + 1, right, key);
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 5, 7, 8, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int key;
+    
+    printf("Data array (terurut): ");
+    printArray(arr, n);
+    
+    printf("Masukkan angka yang dicari: ");
+    scanf("%d", &key);
+    
+    int result = binarySearchRecursive(arr, 0, n - 1, key);
+    
+    if (result != -1) {
+        printf("Data %d ditemukan di index %d\n", key, result);
+    } else {
+        printf("Data %d tidak ditemukan dalam array\n", key);
+    }
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="note-box">
+            <p><strong>Kompleksitas Binary Search:</strong></p>
+            <ul>
+                <li><strong>Best Case:</strong> O(1) - data ada di posisi tengah</li>
+                <li><strong>Average Case:</strong> O(log n)</li>
+                <li><strong>Worst Case:</strong> O(log n) - data di ujung atau tidak ada</li>
+                <li><strong>Space Complexity:</strong> O(1) untuk iteratif, O(log n) untuk rekursif</li>
+            </ul>
+        </div>
+
+        <h4>✅ Kelebihan Binary Search</h4>
+        <div class="highlight">
+            <ul>
+                <li>Sangat cepat untuk array besar (O(log n))</li>
+                <li>Efisien - mengurangi area pencarian setengahnya setiap iterasi</li>
+                <li>Cocok untuk database dan sistem besar</li>
+            </ul>
+        </div>
+
+        <h4>❌ Kekurangan Binary Search</h4>
+        <div class="warning">
+            <ul>
+                <li><strong style="color: #dc3545;">Harus menggunakan array yang TERURUT</strong></li>
+                <li>Jika data tidak terurut, harus di-sorting terlebih dahulu (overhead tambahan)</li>
+                <li>Lebih kompleks untuk diimplementasikan dibanding Linear Search</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- PERBANDINGAN -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>📊 Perbandingan Linear vs Binary Search</h3>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Linear Search</th>
+                        <th>Binary Search</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kompleksitas</strong></td>
+                        <td>O(n)</td>
+                        <td>O(log n)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prasyarat Data</strong></td>
+                        <td>Tidak perlu terurut</td>
+                        <td>Harus terurut</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kecepatan</strong></td>
+                        <td>Lambat untuk data besar</td>
+                        <td>Sangat cepat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Implementasi</strong></td>
+                        <td>Sederhana</td>
+                        <td>Lebih kompleks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cocok Untuk</strong></td>
+                        <td>Array kecil, data tidak terurut</td>
+                        <td>Array besar, data terurut</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contoh (n=1000)</strong></td>
+                        <td>Max 1000 perbandingan</td>
+                        <td>Max 10 perbandingan</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>📈 Perbandingan Jumlah Operasi</h4>
+        <div class="code-block" style="background: #f8f9fa;">
+<pre style="color: #333;">
+<strong>Contoh untuk array dengan 1,000,000 elemen:</strong>
+
+Linear Search (Worst Case):
+└─ Butuh 1,000,000 perbandingan 😰
+
+Binary Search (Worst Case):
+└─ Butuh ~20 perbandingan 🚀
+
+<strong>Perbedaan:</strong> Binary Search 50,000x lebih cepat!
+
+<strong>Rumus Binary Search:</strong>
+Iterasi maksimal = log₂(n)
+Contoh:
+- n = 100           → max 7 iterasi
+- n = 1,000         → max 10 iterasi
+- n = 1,000,000     → max 20 iterasi
+- n = 1,000,000,000 → max 30 iterasi
+</pre>
+        </div>
+
+        <h4>🏆 Kapan Menggunakan Algoritma Apa?</h4>
+        <div class="highlight">
+            <p><strong>Gunakan Linear Search jika:</strong></p>
+            <ul>
+                <li>Array berukuran kecil (< 100 elemen)</li>
+                <li>Data tidak terurut dan tidak ingin/tidak bisa di-sorting</li>
+                <li>Mencari data yang kemungkinan ada di awal array</li>
+                <li>Implementasi sederhana lebih diprioritaskan</li>
+            </ul>
+
+            <p><strong>Gunakan Binary Search jika:</strong></p>
+            <ul>
+                <li>Array berukuran besar (> 100 elemen)</li>
+                <li>Data sudah terurut atau bisa di-sorting terlebih dahulu</li>
+                <li>Performa dan kecepatan adalah prioritas</li>
+                <li>Akan melakukan pencarian berulang kali pada data yang sama</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- APLIKASI PRAKTIS -->
+    <!-- ============================================= -->
+    <div class="subsection">
+        <h3>💼 Aplikasi Praktis dalam Kehidupan Nyata</h3>
+
+        <div class="example-box">
+            <div class="example-title">🔍 Linear Search digunakan pada:</div>
+            <ul>
+                <li><strong>Shopping Cart:</strong> Mencari item dalam keranjang belanja (biasanya sedikit item)</li>
+                <li><strong>Email Unread:</strong> Mencari email yang belum dibaca di inbox kecil</li>
+                <li><strong>Contact List:</strong> Mencari kontak di daftar yang tidak terurut</li>
+                <li><strong>Small Databases:</strong> Pencarian pada tabel database kecil tanpa index</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">⚡ Binary Search digunakan pada:</div>
+            <ul>
+                <li><strong>Dictionary/Kamus:</strong> Mencari kata dalam kamus (terurut alfabetis)</li>
+                <li><strong>Phone Book:</strong> Mencari nomor telepon (terurut berdasarkan nama)</li>
+                <li><strong>Library System:</strong> Mencari buku berdasarkan ISBN/kode (terurut)</li>
+                <li><strong>Database Index:</strong> Pencarian cepat pada database besar dengan index</li>
+                <li><strong>Version Control:</strong> Git bisect untuk mencari bug di commit history</li>
+                <li><strong>IP Routing:</strong> Mencari rute terbaik dalam routing table</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- LATIHAN -->
+    <!-- ============================================= -->
+    <div class="exercise-box">
+        <h4>💪 Latihan Praktek</h4>
+        
+        <p><strong>SOAL 1: Program Menu Searching</strong></p>
+        <ul>
+            <li>Buat program dengan menu:
+                <ol>
+                    <li>Input array (max 20 elemen)</li>
+                    <li>Linear Search</li>
+                    <li>Binary Search (dengan sorting otomatis)</li>
+                    <li>Tampilkan array</li>
+                    <li>Keluar</li>
+                </ol>
+            </li>
+            <li>Tampilkan jumlah perbandingan yang dilakukan</li>
+            <li>Tampilkan apakah data ditemukan dan di index berapa</li>
+        </ul>
+
+        <p><strong>SOAL 2: Pencarian Data Mahasiswa</strong></p>
+        <ul>
+            <li>Buat struct Mahasiswa: nim (string), nama (string), nilai (float)</li>
+            <li>Input data 10 mahasiswa</li>
+            <li>Implementasi:
+                <ul>
+                    <li>Linear Search berdasarkan NIM</li>
+                    <li>Binary Search berdasarkan Nama (harus sorting dulu)</li>
+                </ul>
+            </li>
+            <li>Tampilkan data mahasiswa jika ditemukan</li>
+        </ul>
+
+        <p><strong>SOAL 3: Perbandingan Performa</strong></p>
+        <ul>
+            <li>Generate array random 1000 elemen (nilai 1-10000)</li>
+            <li>Sort array menggunakan algoritma sorting (Bubble/Selection/Insertion)</li>
+            <li>Cari nilai random dengan:
+                <ul>
+                    <li>Linear Search</li>
+                    <li>Binary Search</li>
+                </ul>
+            </li>
+            <li>Hitung dan bandingkan jumlah perbandingan kedua algoritma</li>
+            <li>Buktikan bahwa Binary Search jauh lebih cepat!</li>
+        </ul>
+
+        <p><strong>SOAL 4: Combined Search System</strong></p>
+        <ul>
+            <li>Buat program yang otomatis memilih algoritma pencarian terbaik</li>
+            <li>Logika:
+                <ul>
+                    <li>Jika array < 50 elemen → gunakan Linear Search</li>
+                    <li>Jika array ≥ 50 elemen dan terurut → gunakan Binary Search</li>
+                    <li>Jika array ≥ 50 elemen dan tidak terurut → sort dulu, lalu Binary Search</li>
+                </ul>
+            </li>
+            <li>Tampilkan algoritma yang digunakan dan hasilnya</li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <p><strong>💡 Tips Memahami Searching:</strong></p>
+        <ul>
+            <li>Coba tulis proses pencarian di kertas dengan data contoh kecil</li>
+            <li>Untuk Binary Search, gambar diagram pohon untuk melihat pembagian area pencarian</li>
+            <li>Hitung berapa kali perbandingan dilakukan di setiap algoritma</li>
+            <li>Debug dengan print statement untuk melihat proses pencarian</li>
+            <li>Pahami perbedaan Best Case, Average Case, dan Worst Case</li>
+            <li>Praktekkan dengan data yang berbeda-beda ukuran untuk merasakan perbedaan performanya</li>
+        </ul>
+    </div>
+</div>

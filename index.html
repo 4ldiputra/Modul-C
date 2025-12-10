@@ -1,80 +1,87 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modul Pembelajaran Bahasa C</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>📚 Modul Pembelajaran Bahasa C</h1>
-            <p>Panduan lengkap untuk mempelajari pemrograman C dari dasar hingga lanjutan</p>
-        </div>
+      <div class="header">
+        <h1>📚 Modul Pembelajaran Bahasa C</h1>
+        <p>
+          Panduan lengkap untuk mempelajari pemrograman C dari dasar hingga
+          lanjutan
+        </p>
+      </div>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
 
-        <!-- Navigation -->
-        <div class="navigation" id="navigation">
-            <div class="nav-grid">
-                <div class="nav-item" onclick="showSection('intro')">
-                    <h3>🚀 Pengenalan Algoritma & C</h3>
-                    <p>Dasar-dasar pemrograman dan pengenalan bahasa C</p>
-                </div>
-                <div class="nav-item" onclick="showSection('basics')">
-                    <h3>📝 Input/Output & Format</h3>
-                    <p>Cara menggunakan printf, scanf, dan formatting</p>
-                </div>
-                <div class="nav-item" onclick="showSection('operators')">
-                    <h3>⚡ Operator & Aritmatika</h3>
-                    <p>Operator aritmatika, logika, dan perbandingan</p>
-                </div>
-                <div class="nav-item" onclick="showSection('control')">
-                    <h3>🔄 Struktur Kontrol</h3>
-                    <p>If-else, switch, dan struktur pemilihan</p>
-                </div>
-                <div class="nav-item" onclick="showSection('loops')">
-                    <h3>🔁 Perulangan</h3>
-                    <p>For, while, do-while, dan nested loops</p>
-                </div>
-                <div class="nav-item" onclick="showSection('arrays')">
-                    <h3>📊 Array & Pointer</h3>
-                    <p>Array satu dimensi, dua dimensi, dan pointer</p>
-                </div>
-                <div class="nav-item" onclick="showSection('structures')">
-                    <h3>🏗️ Structure & Union</h3>
-                    <p>Struktur data kompleks dan union</p>
-                </div>
-                <div class="nav-item" onclick="showSection('functions')">
-                    <h3>🔧 Function & Recursion</h3>
-                    <p>Pembuatan fungsi dan rekursi</p>
-                </div>
-                <!-- <div class="nav-item" onclick="showSection('memory')">
+      <!-- Navigation -->
+      <div class="navigation" id="navigation">
+        <div class="nav-grid">
+          <div class="nav-item" onclick="showSection('intro')">
+            <h3>🚀 Pengenalan Algoritma & C</h3>
+            <p>Dasar-dasar pemrograman dan pengenalan bahasa C</p>
+          </div>
+          <div class="nav-item" onclick="showSection('basics')">
+            <h3>📝 Input/Output & Format</h3>
+            <p>Cara menggunakan printf, scanf, dan formatting</p>
+          </div>
+          <div class="nav-item" onclick="showSection('operators')">
+            <h3>⚡ Operator & Aritmatika</h3>
+            <p>Operator aritmatika, logika, dan perbandingan</p>
+          </div>
+          <div class="nav-item" onclick="showSection('control')">
+            <h3>🔄 Struktur Kontrol</h3>
+            <p>If-else, switch, dan struktur pemilihan</p>
+          </div>
+          <div class="nav-item" onclick="showSection('loops')">
+            <h3>🔁 Perulangan</h3>
+            <p>For, while, do-while, dan nested loops</p>
+          </div>
+          <div class="nav-item" onclick="showSection('arrays')">
+            <h3>📊 Array & Pointer</h3>
+            <p>Array satu dimensi, dua dimensi, dan pointer</p>
+          </div>
+          <div class="nav-item" onclick="showSection('structures')">
+            <h3>🏗️ Structure & Union</h3>
+            <p>Struktur data kompleks dan union</p>
+          </div>
+          <div class="nav-item" onclick="showSection('functions')">
+            <h3>🔧 Function & Recursion</h3>
+            <p>Pembuatan fungsi dan rekursi</p>
+          </div>
+          <!-- <div class="nav-item" onclick="showSection('memory')">
                     <h3>💾 Memory Allocation</h3>
                     <p>Dynamic memory allocation dengan malloc</p>
                 </div> -->
-                <div class="nav-item" onclick="showSection('files')">
-                    <h3>📁 File Processing</h3>
-                    <p>Operasi file dan pencarian data</p>
-                </div>
-                <div class="nav-item" onclick="showSection('sorting')">
-                    <h3>🔢 Algoritma Sorting</h3>
-                    <p>Bubble sort, selection sort, insertion sort</p>
-                </div>
-                <div class="nav-item" onclick="showSection('advanced')">
-                    <h3>🎓 Proyek Akhir</h3>
-                    <p>Topik lanjutan dan best practices</p>
-                </div>
-            </div>
+          <div class="nav-item" onclick="showSection('files')">
+            <h3>📁 File Processing</h3>
+            <p>Operasi file dan pencarian data</p>
+          </div>
+          <div class="nav-item" onclick="showSection('sorting')">
+            <h3>🔢 Algoritma Sorting</h3>
+            <p>Bubble sort, selection sort, insertion sort</p>
+          </div>
+          <div class="nav-item" onclick="showSection('searching')">
+            <h3>🔍 Algoritma Searching</h3>
+            <p>Linear search dan binary search</p>
+          </div>
+          <div class="nav-item" onclick="showSection('advanced')">
+            <h3>🎓 Proyek Akhir</h3>
+            <p>Topik lanjutan dan best practices</p>
+          </div>
         </div>
+      </div>
 
-        <!-- Content akan dimuat dari file terpisah -->
-        <div id="content-container"></div>
+      <!-- Content akan dimuat dari file terpisah -->
+      <div id="content-container"></div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
